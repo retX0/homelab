@@ -1,0 +1,13 @@
+apiVersion: v2
+name: movie
+version: 0.0.0
+dependencies:
+- name: qbittorrent
+  version: 14.0.1
+  repository: https://aste88.github.io/helm-charts/
+- name: sonarr
+  version: 17.0.0
+  repository: https://aste88.github.io/helm-charts/
+- name: radarr
+  version: 17.0.1
+  repository: https://aste88.github.io/helm-charts/

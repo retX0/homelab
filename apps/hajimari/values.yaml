@@ -22,18 +22,35 @@ hajimari:
     namespaceSelector:
       any: true
     globalBookmarks:
-      - group: Homelab
+      - group: Movie
         bookmarks:
-          - name: Documentation
-            url: https://homelab.qos.cc
-          - name: Public GitHub repository
-            url: https://github.com/khuedoan/homelab
+          - name: radarr
+            url: https://radarr.qos.cc
+          - name: sonarr
+            url: https://sonarr.qos.cc
+          - name: PT
+            url: https://pt.qos.cc
       - group: Managed services
         bookmarks:
           - name: Terraform Cloud
             url: https://app.terraform.io
           - name: Cloudflare
             url: https://dash.cloudflare.com
-  persistence:
-    data:
-      enabled: false
+      - group: Github
+        bookmarks:
+          - name: Me
+            url: https://github.com/retx0
+          - name: gists
+            url: https://gist.github.com/retX0
+      - group: AI
+        bookmarks:
+          - name: chatGPT
+            url: https://chat.openai.com
+      - group: Company
+        bookmarks:
+          - name: PVE
+            url: https://172.16.90.98:8006
+          - name: 外传内
+            url: https://172.16.18.240
+          - name: 内传外 
+            url: https://172.16.18.250

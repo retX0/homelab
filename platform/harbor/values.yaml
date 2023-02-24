@@ -11,6 +11,7 @@ harbor:
         ingress.kubernetes.io/proxy-body-size: "0"
         nginx.ingress.kubernetes.io/ssl-redirect: "true"
         nginx.ingress.kubernetes.io/proxy-body-size: "0"
+        hajimari.io/enable: 'false'
     tls:
       certSource: secret
       secret:

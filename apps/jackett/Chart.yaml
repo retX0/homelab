@@ -3,5 +3,5 @@ name: jackett
 version: 0.0.0
 dependencies:
 - name: jackett
-  version: 13.0.38
-  repository: https://charts.truecharts.org/
+  version: 11.7.2
+  repository: https://k8s-at-home.com/charts/

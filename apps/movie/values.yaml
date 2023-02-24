@@ -9,6 +9,7 @@ qbittorrent:
       ingressClassName: nginx
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod
+        hajimari.io/enable: false
       hosts:
         - host: &host pt.qos.cc
           paths:
@@ -42,6 +43,8 @@ sonarr:
       ingressClassName: nginx
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod
+        hajimari.io/group: ""
+        hajimari.io/icon: "television"
       hosts:
         - host: &host sonarr.qos.cc
           paths:
@@ -75,6 +78,8 @@ radarr:
       ingressClassName: nginx
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod
+        hajimari.io/group: ""
+        hajimari.io/icon: "movie"
       hosts:
         - host: &host radarr.qos.cc
           paths:

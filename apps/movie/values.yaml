@@ -25,7 +25,7 @@ qbittorrent:
       mountPath: /config
       storageClass: longhorn
       accessMode: ReadWriteOnce
-      size: 512Mi
+      size: 2Gi
       retain: true
 
     downloads:
@@ -60,7 +60,7 @@ sonarr:
       mountPath: /config
       storageClass: longhorn
       accessMode: ReadWriteOnce
-      size: 512Mi
+      size: 2Gi
       retain: true
 
     media:
@@ -95,7 +95,7 @@ radarr:
       mountPath: /config
       storageClass: longhorn
       accessMode: ReadWriteOnce
-      size: 512Mi
+      size: 2Gi
       retain: true
     media:
       enabled: true

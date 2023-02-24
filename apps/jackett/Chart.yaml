@@ -1,0 +1,7 @@
+apiVersion: v2
+name: jackett
+version: 0.0.0
+dependencies:
+- name: jackett
+  version: 13.0.38
+  repository: https://charts.truecharts.org/

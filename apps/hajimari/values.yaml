@@ -54,3 +54,6 @@ hajimari:
             url: https://172.16.18.240
           - name: 内传外 
             url: https://172.16.18.250
+  persistence:
+    data:
+      enabled: false

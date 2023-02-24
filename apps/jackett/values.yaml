@@ -27,3 +27,9 @@ jackett:
       accessMode: ReadWriteOnce
       size: 1Gi
       retain: true
+
+flaresolverr:
+  image:
+    repository: ghcr.io/flaresolverr/flaresolverr
+    pullPolicy: IfNotPresent
+    tag: latest

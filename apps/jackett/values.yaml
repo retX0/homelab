@@ -1,4 +1,6 @@
 jackett:
+  env:
+    TZ: Asia/Shanghai
   image:
     repository: ghcr.io/linuxserver/jackett
     pullPolicy: IfNotPresent
@@ -29,6 +31,8 @@ jackett:
       retain: true
 
 flaresolverr:
+  env:
+    TZ: Asia/Shanghai
   image:
     repository: ghcr.io/flaresolverr/flaresolverr
     pullPolicy: IfNotPresent

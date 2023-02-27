@@ -45,6 +45,7 @@ sonarr:
         cert-manager.io/cluster-issuer: letsencrypt-prod
         hajimari.io/group: ""
         hajimari.io/icon: "television"
+        hajimari.io/appName: "sonarr"
       hosts:
         - host: &host sonarr.qos.cc
           paths:

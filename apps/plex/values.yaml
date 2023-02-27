@@ -28,3 +28,7 @@ plex:
       accessMode: ReadWriteOnce
       size: 2Gi
       retain: true
+    media:
+      enabled: true
+      mountPath: /media
+      existingClaim: media

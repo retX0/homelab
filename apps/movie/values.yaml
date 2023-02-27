@@ -80,6 +80,7 @@ radarr:
         cert-manager.io/cluster-issuer: letsencrypt-prod
         hajimari.io/group: ""
         hajimari.io/icon: "movie"
+        hajimari.io/appName: "radarr"
       hosts:
         - host: &host radarr.qos.cc
           paths:

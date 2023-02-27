@@ -9,7 +9,8 @@ plex:
       ingressClassName: nginx
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod
-        hajimari.io/enable: 'false'
+        hajimari.io/enable: 'true'
+        hajimari.io/icon: 'plex'
       hosts:
         - host: &host plex.qos.cc
           paths:

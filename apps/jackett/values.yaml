@@ -4,7 +4,7 @@ jackett:
   image:
     repository: ghcr.io/linuxserver/jackett
     pullPolicy: IfNotPresent
-    tag: 0.20.3288
+    tag: 0.20.3403
   ingress:
     main:
       enabled: true

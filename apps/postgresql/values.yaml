@@ -24,7 +24,7 @@ postgresql-ha:
     config:
       enabled: true
       mountPath: /bitnami/postgresql
-      existingClaim: "postgresql-pvc"
+      existingClaim: postgresql-pvc
       accessMode: ReadWriteOnce
       size: 8Gi
       retain: true

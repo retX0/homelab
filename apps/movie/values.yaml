@@ -32,6 +32,40 @@ qbittorrent:
       enabled: true
       mountPath: /downloads
       existingClaim: nfs-downloads
+overseerr:
+  image:
+    tag: latest
+  env:
+    PUID: 2199
+    PGID: 568
+    TZ: Asia/Shanghai
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: nginx
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+        hajimari.io/group: ""
+        hajimari.io/icon: "television"
+        hajimari.io/appName: "overseerr"
+      hosts:
+        - host: &host overseerr.qos.cc
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - secretName: overseerr-tls-certificate
+          hosts:
+            - *host
+  persistence:
+    config:
+      enabled: true
+      mountPath: /app/config
+      storageClass: longhorn
+      accessMode: ReadWriteOnce
+      size: 2Gi
+      retain: true
+
 sonarr:
   env:
     PUID: 2199

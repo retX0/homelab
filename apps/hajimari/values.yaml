@@ -72,16 +72,22 @@ hajimari:
         icon: simple-icons:spotify
         searchUrl: hhttps://open.spotify.com/search/{query}
         url: https://open.spotify.com
-    # customApps:
-    #   - group: Media
-    #     apps:
-    #       - name: Test
-    #         url: 'https://example.com'
-    #         icon: 'mdi:test-tube'
-    #         info: This is a test app
+    customApps:
+      - group: AI
+        apps:
+          - name: GPT
+            url: 'https://chat.openai.com'
+            icon: 'mdi:forum'
+            info: 'Chat GPT'
+          - name: Bing
+            url: 'https://www.bing.com/search?q=Bing+AI&showconv=1'
+            icon: 'mdi:search-web'
+            info: 'New Bing'
     globalBookmarks:
       - group: Movie
         bookmarks:
+          - name: jackett
+            url: https://jackett.qos.cc
           - name: radarr
             url: https://radarr.qos.cc
           - name: sonarr
@@ -100,18 +106,6 @@ hajimari:
             url: https://github.com/retx0
           - name: gists
             url: https://gist.github.com/retX0
-      - group: AI
-        bookmarks:
-          - name: chatGPT
-            url: https://chat.openai.com
-      - group: Company
-        bookmarks:
-          - name: PVE
-            url: https://172.16.90.98:8006
-          - name: 外传内
-            url: https://172.16.18.240
-          - name: 内传外 
-            url: https://172.16.18.250
   persistence:
     data:
       enabled: false

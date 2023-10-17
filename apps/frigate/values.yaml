@@ -1,0 +1,68 @@
+# kubectl apply -f https://raw.githubusercontent.com/therevoman/edgetpu-device-plugin/master/edgetpu-device-plugin.amd64.yaml
+# install intel-gpu-tools first
+frigate:
+  env:
+    TZ: Asia/Shanghai
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+      hajimari.io/appName: Camera
+      hajimari.io/icon: cctv
+    hosts:
+      - host: &host frigate.qos.cc
+        paths:
+          - '/'
+    tls:
+      - secretName: frigate-tls-certificate
+        hosts:
+          - *host
+  config: |
+    ffmpeg:
+      hwaccel_args:
+        - -hwaccel
+        - vaapi
+        - -hwaccel_device
+        - /dev/dri/renderD128
+    mqtt:
+      host: 172.23.31.35
+      port: 1883
+      topic_prefix: frigate
+      client_id: frigate
+      stats_interval: 60
+    cameras:
+      door:
+        ffmpeg:
+          inputs:
+            - path: rtsp://172.23.31.40:554/s0
+              roles:
+                - detect
+        detect:
+          width: 1920
+          height: 1080
+          fps: 10
+    record:
+      enabled: True
+      retain:
+        days: 30
+        mode: all
+      events:
+        retain:
+          default: 14
+          mode: active_objects
+  extraVolumes:
+    - name: media
+      persistentVolumeClaim:
+        claimName: nfs-frigate
+  extraVolumeMounts:
+    - name: media
+      mountPath: /media
+  securityContext:
+    privileged: true
+    capabilities:
+        add: ["CAP_PERFMON"]
+  resources:
+    limits:
+      kkohtaka.org/edgetpu: 1
+      gpu.intel.com/i915: 1

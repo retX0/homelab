@@ -19,13 +19,29 @@ gitea:
     admin:
       existingSecret: gitea-admin-secret
     config:
+      APP_NAME: "Let's code."
+      database:
+        DB_TYPE: postgres
+        HOST: postgresql.postgresql.svc.cluster.local:5432
+        NAME: gitea
+        USER: gitea
+        PASSWD: gitea
+      service:
+        DISABLE_REGISTRATION: true
+        DEFAULT_USER_VISIBILITY: limited
+        DEFAULT_ORG_VISIBILITY: limited
       server:
         LANDING_PAGE: explore
         ROOT_URL: https://git.qos.cc
       webhook:
         ALLOWED_HOST_LIST: private
+      migrations:
+        ALLOWED_DOMAINS: gitea.xnxin.com
   persistence:
     storageClass: longhorn
+  redis-cluster:
+    enabled: true
+  postgresql-ha:
+    enabled: false
   postgresql:
-    persistence:
-      storageClass: longhorn
+    enabled: false

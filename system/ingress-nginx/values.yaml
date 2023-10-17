@@ -1,5 +1,7 @@
 ingress-nginx:
   controller:
+    config:
+      proxy-body-size: "0"
     admissionWebhooks:
       timeoutSeconds: 30
     metrics:

@@ -1,0 +1,62 @@
+minio:
+  rootUser: "admin"
+  rootPassword: "kuj2SUDLgHDNBQEzMS85ySfR7KBi5FRE"
+
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+      hajimari.io/enable: 'false'
+    path: /
+    hosts:
+      - &api-host api.minio.qos.cc
+    tls: 
+      - secretName: api-minio-tls-certificate
+        hosts:
+          - *api-host
+  consoleIngress:
+    enabled: true
+    ingressClassName: nginx
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+      hajimari.io/icon: "bucket"
+      hajimari.io/appName: "MiniO"
+    path: /
+    hosts:
+      - &host minio.qos.cc
+    tls: 
+      - secretName: minio-tls-certificate
+        hosts:
+          - *host
+
+  ## List of buckets to be created after minio install
+  ##
+  persistence:
+    enabled: true
+    existingClaim: "minio"
+  buckets:
+    # Name of the bucket
+    - name: k3s-backup
+      # Policy to be set on the
+      # bucket [none|download|upload|public]
+      policy: upload
+    #   # Purge if bucket exists already
+    #   purge: false
+    #   # set versioning for
+    #   # bucket [true|false]
+    #   versioning: false
+    #   # set objectlocking for
+    #   # bucket [true|false] NOTE: versioning is enabled by default if you use locking
+    #   objectlocking: false
+  mode: standalone
+  replicas: 1
+  resources:
+    requests:
+      memory: 512Mi
+  securityContext:
+    runAsUser: 568
+    runAsGroup: 568
+    fsGroup: 568

@@ -1,9 +1,7 @@
-# ues this to setup library
-# k3s kubectl port-forward svc/plex 32400 -n plex --address='0.0.0.0'
 apiVersion: v2
 name: plex
 version: 0.0.0
 dependencies:
 - name: plex
-  version: 7.0.2
-  repository: https://aste88.github.io/helm-charts/
+  version: 7.1.4
+  repository: https://k8s-home-lab.github.io/helm-charts/

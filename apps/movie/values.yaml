@@ -1,7 +1,7 @@
 qbittorrent:
+  image: 
+    tag: "4.5.4"
   env:
-    PUID: 2199
-    PGID: 568
     TZ: Asia/Shanghai
   ingress:
     main:
@@ -19,22 +19,28 @@ qbittorrent:
         - secretName: pt-tls-certificate
           hosts:
             - *host
+  podSecurityContext:
+    runAsUser: 2199
+    runAsGroup: 568
   persistence:
     config:
       enabled: true
       mountPath: /config
-      storageClass: longhorn
-      accessMode: ReadWriteOnce
-      size: 2Gi
+      subPath: qbittorrent
+      existingClaim: pvc-config
       retain: true
 
     downloads:
       enabled: true
       mountPath: /downloads
       existingClaim: nfs-downloads
+  resources:
+    limits:
+      memory: 2Gi
 overseerr:
   image:
     tag: latest
+    imagePullPolicy: Always
   env:
     PUID: 2199
     PGID: 568
@@ -46,7 +52,7 @@ overseerr:
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod
         hajimari.io/group: ""
-        hajimari.io/icon: "television"
+        hajimari.io/icon: "movie"
         hajimari.io/appName: "overseerr"
       hosts:
         - host: &host overseerr.qos.cc
@@ -61,15 +67,10 @@ overseerr:
     config:
       enabled: true
       mountPath: /app/config
-      storageClass: longhorn
-      accessMode: ReadWriteOnce
-      size: 2Gi
-      retain: true
-
+      subPath: movie_tools/overseerr
+      existingClaim: pvc-config
 sonarr:
   env:
-    PUID: 2199
-    PGID: 568
     TZ: Asia/Shanghai
   ingress:
     main:
@@ -77,6 +78,7 @@ sonarr:
       ingressClassName: nginx
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod
+        hajimari.io/enable: 'false'
         hajimari.io/group: ""
         hajimari.io/icon: "television"
         hajimari.io/appName: "sonarr"
@@ -89,23 +91,22 @@ sonarr:
         - secretName: sonarr-tls-certificate
           hosts:
             - *host
+  podSecurityContext:
+    runAsUser: 2199
+    runAsGroup: 568
   persistence:
     config:
       enabled: true
       mountPath: /config
-      storageClass: longhorn
-      accessMode: ReadWriteOnce
-      size: 2Gi
+      subPath: movie_tools/sonarr
+      existingClaim: pvc-config
       retain: true
-
     media:
       enabled: true
       mountPath: /media
       existingClaim: nfs-downloads
 radarr:
   env:
-    PUID: 2199
-    PGID: 568
     TZ: Asia/Shanghai
   ingress:
     main:
@@ -113,6 +114,7 @@ radarr:
       ingressClassName: nginx
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod
+        hajimari.io/enable: 'false'
         hajimari.io/group: ""
         hajimari.io/icon: "movie"
         hajimari.io/appName: "radarr"
@@ -125,16 +127,17 @@ radarr:
         - secretName: radarr-tls-certificate
           hosts:
             - *host
+  podSecurityContext:
+    runAsUser: 2199
+    runAsGroup: 568
   persistence:
     config:
       enabled: true
       mountPath: /config
-      storageClass: longhorn
-      accessMode: ReadWriteOnce
-      size: 2Gi
+      subPath: movie_tools/radarr
+      existingClaim: pvc-config
       retain: true
     media:
       enabled: true
       mountPath: /media
       existingClaim: nfs-downloads
-

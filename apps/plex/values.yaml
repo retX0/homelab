@@ -1,16 +1,15 @@
 plex:
   env:
-    PUID: 2199
-    PGID: 568
     TZ: Asia/Shanghai
+    # PLEX_CLAIM: "" https://www.plex.tv/claim 首次使用时填写这个 env 可直接通过域名来访问，否则需要端口转发。
   ingress:
     main:
       enabled: true
       ingressClassName: nginx
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod
-        hajimari.io/enable: 'true'
-        hajimari.io/icon: 'plex'
+        hajimari.io/icon: "plex"
+        hajimari.io/appName: "plex"
       hosts:
         - host: &host plex.qos.cc
           paths:
@@ -20,15 +19,20 @@ plex:
         - secretName: plex-tls-certificate
           hosts:
             - *host
+  podSecurityContext:
+    runAsUser: 568
+    runAsGroup: 568
+    fsGroup: 568
   persistence:
     config:
       enabled: true
       mountPath: /config
-      storageClass: longhorn
-      accessMode: ReadWriteOnce
-      size: 2Gi
-      retain: true
+      existingClaim: config
     media:
       enabled: true
       mountPath: /media
       existingClaim: media
+  # resources:
+  #   limits:
+  #     gpu.intel.com/i915: 1
+

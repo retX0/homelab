@@ -1,0 +1,10 @@
+postgresql:
+  global:
+    storageClass: "longhorn"
+    postgresql:
+      auth:
+        postgresPassword: "amaretto-snowplow-reps"
+  primary:
+    name: primary 
+    service:
+      type: LoadBalancer

@@ -1,0 +1,41 @@
+# kubectl create secret generic velero \
+#   --namespace velero \
+#   --from-file cloud=credentials-velero
+velero:
+  initContainers:
+    - name: velero-plugin-for-csi
+      image: velero/velero-plugin-for-csi:v0.6.0
+      imagePullPolicy: IfNotPresent
+      volumeMounts:
+        - mountPath: /target
+          name: plugins
+    - name: velero-plugin-for-aws
+      image: velero/velero-plugin-for-aws:v1.8.0
+      imagePullPolicy: IfNotPresent
+      volumeMounts:
+        - mountPath: /target
+          name: plugins
+  credentials:
+    secretContents:
+      cloud: |
+        [default]
+        aws_access_key_id=admin
+        aws_secret_access_key=kuj2SUDLgHDNBQEzMS85ySfR7KBi5FRE
+  configuration:
+    backupStorageLocation:
+    - name: default
+      provider: aws
+      bucket: k3s-backup
+      default: true
+      accessMode: ReadWrite
+      config:
+        region: minio
+        s3ForcePathStyle: true
+        s3Url: &api_host "https://api.minio.qos.cc"
+    volumeSnapshotLocation:
+    - name: default
+      provider: aws
+      bucket: k3s-snapshots
+      config: 
+        region: minio
+  deployNodeAgent: true

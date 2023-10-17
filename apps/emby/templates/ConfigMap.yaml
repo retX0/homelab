@@ -1,0 +1,293 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: emby-nginx
+data:
+  nginx.conf: |
+    load_module modules/ngx_http_js_module.so;
+    #load_module modules/ngx_stream_js_module.so; # don't need this
+
+    user  nginx;
+    worker_processes  auto;
+
+    error_log  /var/log/nginx/error.log notice;
+    pid        /var/run/nginx.pid;
+
+
+    events {
+        worker_connections  1024;
+    }
+
+
+    http {
+        include       /etc/nginx/mime.types;
+        default_type  application/octet-stream;
+
+        log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                        '$status $body_bytes_sent "$http_referer" '
+                        '"$http_user_agent" "$http_x_forwarded_for"';
+
+        access_log  /var/log/nginx/access.log  main;
+
+        sendfile        on;
+        #tcp_nopush     on;
+
+        keepalive_timeout  65;
+
+        #gzip  on;
+
+        include /etc/nginx/conf.d/*.conf;
+    }
+  emby.conf: |
+    # Load the njs script
+    js_path /etc/nginx/conf.d/;
+    js_import emby2Pan from emby.js;
+    # Cache images, subtitles
+    proxy_cache_path /var/cache/nginx/emby levels=1:2 keys_zone=emby:100m max_size=1g inactive=30d use_temp_path=off;
+    proxy_cache_path /var/cache/nginx/emby/subs levels=1:2 keys_zone=embysubs:10m max_size=1g inactive=30d use_temp_path=off;
+    server{
+        gzip on;
+        listen 80;
+        server_name default;
+        ## The default `client_max_body_size` is 1M, this might not be enough for some posters, etc.
+        client_max_body_size 20M;
+        # # Security / XSS Mitigation Headers
+        # add_header X-Frame-Options "SAMEORIGIN";
+        # add_header X-XSS-Protection "1; mode=block";
+        # add_header X-Content-Type-Options "nosniff";
+        # aliDrive direct stream need no-referrer
+        add_header 'Referrer-Policy' 'no-referrer';
+        resolver kube-dns.kube-system.svc.cluster.local;
+        set $emby "http://emby.emby.svc.cluster.local:8096";  #emby/jellyfin address
+
+        # Proxy sockets traffic for jellyfin-mpv-shim and webClient
+        location ~* /(socket|embywebsocket) {
+            # Proxy emby/jellyfin Websockets traffic
+            proxy_pass $emby;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "upgrade";
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+            proxy_set_header X-Forwarded-Protocol $scheme;
+            proxy_set_header X-Forwarded-Host $http_host;
+        }
+        # Cache the Subtitles
+        location ~* /videos/(.*)/Subtitles {
+            proxy_pass $emby;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+            proxy_set_header X-Forwarded-Protocol $scheme;
+            proxy_set_header X-Forwarded-Host $http_host;
+
+            proxy_cache embysubs;
+            proxy_cache_revalidate on;
+            proxy_cache_lock_timeout 10s;
+            proxy_cache_lock on;
+            proxy_cache_valid 200 30d;
+            proxy_cache_key $proxy_host$uri;
+            add_header X-Cache-Status $upstream_cache_status; # This is only to check if cache is working
+        }
+
+        # Redirect the stream to njs
+        location ~* /videos/(.*)/stream {
+            # Cache alist direct link
+            add_header    Cache-Control  max-age=3600;
+            js_content emby2Pan.redirect2Pan;
+        }
+        # Redirect Audio the stream to njs
+        location ~* /Audio/(.*)/universal {
+            # Cache alist direct link
+            add_header    Cache-Control  max-age=3600;
+            js_content emby2Pan.redirect2Pan;
+        }
+        # for webClient download ,android is SyncService api
+        location ~* /Items/(.*)/Download {
+            js_content emby2Pan.redirect2Pan;
+        }
+
+        # Cache the images
+        location ~ /Items/(.*)/Images {
+            proxy_pass $emby;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+            proxy_set_header X-Forwarded-Protocol $scheme;
+            proxy_set_header X-Forwarded-Host $http_host;
+
+            proxy_cache emby;
+            proxy_cache_revalidate on;
+            proxy_cache_lock_timeout 10s;
+            proxy_cache_lock on;
+            add_header X-Cache-Status $upstream_cache_status; # This is only to check if cache is working
+        }
+
+        location / {
+            # Proxy main emby/jellyfin traffic
+            proxy_pass $emby;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+            proxy_set_header X-Forwarded-Protocol $scheme;
+            proxy_set_header X-Forwarded-Host $http_host;
+            # Disable buffering when the nginx proxy gets very resource heavy upon streaming
+            proxy_buffering off;
+        }
+    }
+  emby.js: |
+    //author: @bpking  https://github.com/bpking1/embyExternalUrl
+    //查看日志: "docker logs -f -n 10 emby-nginx 2>&1  | grep js:"
+    async function redirect2Pan(r) {
+        //根据实际情况修改下面的设置
+        const embyHost = 'http://emby.emby.svc.cluster.local:8096'; //这里默认emby/jellyfin的地址是宿主机,要注意iptables给容器放行端口
+        const embyMountPath = '/aliyun-drive';  // rclone 的挂载目录, 例如将od, gd挂载到/mnt目录下:  /mnt/onedrive  /mnt/gd ,那么这里 就填写 /mnt
+        const alistToken = 'alist-6b13dd1b-4e11-4488-895f-a9a2f194a71bXbRHyy7FN5YZsrXFUPVAqbvX3zy2bOQ4Bexe6PiTXdnKqIcE3KZirlIWpSAe5dX0';      //alist token, 在alist后台查看
+        const alistAddr= 'http://alist.alist.svc.cluster.local:5244'; //访问宿主机上5244端口的alist地址, 要注意iptables给容器放行端口
+        const embyApiKey = 'eab56ccda1ee46a89e16dedb3e62fb95';  //emby/jellyfin api key, 在emby/jellyfin后台设置
+        const alistPublicAddr = 'https://alist.qos.cc'; // alist公网地址, 用于需要alist server代理流量的情况, 按需填写
+
+        //fetch mount emby/jellyfin file path
+        const regex = /[A-Za-z0-9]+/g;
+        const itemId = r.uri.replace('emby', '').replace(/-/g, '').match(regex)[1];
+        const mediaSourceId = r.args.MediaSourceId ? r.args.MediaSourceId : r.args.mediaSourceId;
+        const Etag = r.args.Tag
+        let api_key = r.args['X-Emby-Token'] ? r.args['X-Emby-Token'] : r.args.api_key;
+        api_key = api_key ? api_key : embyApiKey;
+
+        let itemInfoUri = '';
+        if (mediaSourceId) {
+            itemInfoUri = `${embyHost}/Items/${itemId}/PlaybackInfo?MediaSourceId=${mediaSourceId}&api_key=${api_key}`;
+        }else{
+            itemInfoUri = `${embyHost}/Items/${itemId}/PlaybackInfo?api_key=${api_key}`;
+        }
+        r.warn(`itemInfoUri: ${itemInfoUri}`);
+        const embyRes = await fetchEmbyFilePath(itemInfoUri, Etag);
+        if (embyRes.startsWith('error')) {
+            r.error(embyRes);
+            r.return(500, embyRes);
+            return;
+        }
+        r.warn(`mount emby file path: ${embyRes}`);
+
+        //fetch alist direct link
+        const alistFilePath = embyRes.replace(embyMountPath, '');
+        const alistFsGetApiPath = `${alistAddr}/api/fs/get`;
+        let alistRes = await fetchAlistPathApi(alistFsGetApiPath, alistFilePath, alistToken);
+        if (!alistRes.startsWith('error')) {
+            alistRes =  alistRes.includes('http://172.17.0.1') ? alistRes.replace('http://172.17.0.1',alistPublicAddr) : alistRes;
+            r.warn(`redirect to: ${alistRes}`);
+            r.return(302, alistRes);
+            return;
+        }
+        if (alistRes.startsWith('error403')) {
+            r.error(alistRes);
+            r.return(403, alistRes);
+            return;
+        }
+        if (alistRes.startsWith('error500')) {
+            const filePath = alistFilePath.substring(alistFilePath.indexOf('/', 1));
+            const alistFsListApiPath = `${alistAddr}/api/fs/list`;
+            const foldersRes = await fetchAlistPathApi(alistFsListApiPath, '/', alistToken);
+            if (foldersRes.startsWith('error')) {
+                r.error(foldersRes);
+                r.return(500, foldersRes);
+                return;
+            }
+            const folders = foldersRes.split(',').sort();
+            for (let i = 0; i < folders.length; i++) {
+                r.warn(`try to fetch alist path from /${folders[i]}${filePath}`);
+                let driverRes = await fetchAlistPathApi(alistFsGetApiPath, `/${folders[i]}${filePath}`, alistToken);
+                if (!driverRes.startsWith('error')) {
+                    driverRes =  driverRes.includes('http://172.17.0.1') ? driverRes.replace('http://172.17.0.1',alistPublicAddr) : driverRes;
+                    r.warn(`redirect to: ${driverRes}`);
+                    r.return(302, driverRes);
+                    return;
+                }
+            }
+            r.error(alistRes);
+            r.return(404, alistRes);
+            return;
+        }
+        r.error(alistRes);
+        r.return(500, alistRes);
+        return;
+    }
+
+    async function fetchAlistPathApi(alistApiPath, alistFilePath, alistToken) {
+        const alistRequestBody = {
+            "path": alistFilePath,
+            "password": ''
+        }
+        try {
+            const response = await ngx.fetch(alistApiPath, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8',
+                    'Authorization': alistToken
+                },
+                max_response_body_size: 65535,
+                body: JSON.stringify(alistRequestBody)
+            })
+            if (response.ok) {
+                const result = await response.json();
+                if (result === null || result === undefined) {
+                    return `error: alist_path_api response is null`;
+                }
+                if (result.message == 'success') {
+                    if (result.data.raw_url) {
+                        return result.data.raw_url;
+                    }
+                    return result.data.content.map(item => item.name).join(',');
+                }
+                if (result.code == 403) {
+                    return `error403: alist_path_api ${result.message}`;
+                }
+                return `error500: alist_path_api ${result.code} ${result.message}`;
+            }
+            else {
+                return `error: alist_path_api ${response.status} ${response.statusText}`;
+            }
+        } catch (error) {
+            return (`error: alist_path_api fetchAlistFiled ${error}`);
+        }
+    }
+
+    async function fetchEmbyFilePath(itemInfoUri, Etag) {
+        try {
+            const res = await ngx.fetch(itemInfoUri, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8',
+                    'Content-Length': 0,
+                },
+                max_response_body_size: 65535,
+            });
+            if (res.ok) {
+                const result = await res.json();
+                if (result === null || result === undefined) {
+                    return `error: emby_api itemInfoUri response is null`;
+                }
+                if (Etag) {
+                    const mediaSource = result.MediaSources.find(m => m.ETag == Etag);
+                    if (mediaSource && mediaSource.Path) {
+                        return mediaSource.Path;
+                    }
+                }
+                return result.MediaSources[0].Path;
+            }
+            else {
+                return (`error: emby_api ${res.status} ${res.statusText}`);
+            }
+        }
+        catch (error) {
+            return (`error: emby_api fetch mediaItemInfo failed,  ${error}`);
+        }
+    }
+
+    export default { redirect2Pan };

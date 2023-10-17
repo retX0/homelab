@@ -7,6 +7,7 @@ renovate:
         "platform": "gitea",
         "endpoint": "https://git.qos.cc/api/v1",
         "gitAuthor": "Renovate Bot <bot@renovateapp.com>",
-        "autodiscover": true
+        "autodiscover": true,
+        "autodiscoverFilter": ["ops/*"]
       }
   existingSecret: renovate-secret

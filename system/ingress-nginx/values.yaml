@@ -2,6 +2,7 @@ ingress-nginx:
   controller:
     config:
       proxy-body-size: "0"
+      allow-snippet-annotations: true
     admissionWebhooks:
       timeoutSeconds: 30
     metrics:

@@ -1,0 +1,32 @@
+vaultwarden:
+  ingress:
+    enabled: true
+    class: "nginx"
+    hostname: &host "pwd.qos.cc" 
+    tlsSecret: "vaultwarden-tls-certificate"
+    additionalAnnotations:
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+      hajimari.io/enable: 'false'
+  signupsAllowed: false
+  smtp:
+
+    enabled: false
+    host: mx01.qos.cc
+    from: no-reply@qos.cc
+    fromName: "Vault Administrator"
+    username:
+      value: admin
+    password: 
+      value: password #just make it running.
+  domain: https://pwd.qos.cc
+  adminToken:
+    existingSecret: "secret"
+    existingSecretKey: "admin_token"
+  database:
+    type: "postgresql"
+    existingSecret: "secret"
+    existingSecretKey: "database_uri"
+  storage:
+    enabled: true
+    size: "3Gi"
+    class: "longhorn"

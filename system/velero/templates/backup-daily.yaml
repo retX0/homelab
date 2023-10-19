@@ -1,0 +1,63 @@
+# see https://velero.io/docs/v1.3.0/api-types/schedule/
+apiVersion: velero.io/v1
+kind: Schedule
+metadata:
+  name: daily-bakcup
+  namespace: {{ .Release.Namespace }}
+spec:
+  schedule: 0 3 * * *
+  template:
+    includedNamespaces:
+    - 'bark'
+    - 'emby'
+    - 'gitea'
+    - 'immich'
+    - 'jackett'
+    - 'longhorn-system'
+    - 'minio'
+    - 'movie'
+    - 'plex'
+    - 'postgresql'
+    - 'rss'
+    - 'subfinder'
+    - 'uptime-kuma'
+    - 'vault'
+    - 'vaultwarden'
+    excludedNamespaces:
+    - some-namespace
+    includedResources:
+    - '*'
+    includeClusterResources: true
+    snapshotVolumes: null
+    storageLocation: default
+    volumeSnapshotLocations:
+      - default
+    ttl: 50d
+    hooks:
+      resources:
+        -
+          name: notification-hook
+          includedNamespaces:
+          - '*'
+          includedResources:
+          - pods
+          # An array of hooks to run before executing custom actions. Currently only "exec" hooks are supported.
+          post:
+            - 
+              # The type of hook. This must be "exec".
+              exec:
+                container: busybox
+                command:
+                  - /bin/curl
+                  - https://bark.qos.cc/oHUtCXH8rqmRQcn66wS5AL/bakcup-failed?group=Velero
+                onError: Fail
+                timeout: 60s
+status:
+  phase: "FailedValidation"
+  lastBackup:
+  validationErrors:
+    - >-
+      a BackupStorageLocation CRD with the name specified in the backup spec
+      needs to be created before this backup can be executed. Error:
+      backupstoragelocation.velero.io "aws" not found
+      

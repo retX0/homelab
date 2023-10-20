@@ -32,7 +32,7 @@ spec:
     storageLocation: default
     volumeSnapshotLocations:
       - default
-    ttl: 50d
+    ttl: 1024h0m0s
     hooks:
       resources:
         -

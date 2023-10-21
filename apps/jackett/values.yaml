@@ -6,7 +6,7 @@ jackett:
   image:
     repository: ghcr.io/linuxserver/jackett
     pullPolicy: IfNotPresent
-    tag: 0.21.696
+    tag: 0.21.1056
   ingress:
     main:
       enabled: true
@@ -37,4 +37,4 @@ flaresolverr:
   image:
     repository: ghcr.io/flaresolverr/flaresolverr
     pullPolicy: IfNotPresent
-    tag: latest
+    tag: v3.3.6

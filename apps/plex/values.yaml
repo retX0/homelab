@@ -1,7 +1,7 @@
 plex:
   env:
     TZ: Asia/Shanghai
-    # PLEX_CLAIM: "" https://www.plex.tv/claim 首次使用时填写这个 env 可直接通过域名来访问，否则需要端口转发。
+    PLEX_CLAIM: "claim-h2d1n44d-zWzfxAh8TUm" # https://www.plex.tv/claim 首次使用时填写这个 env 可直接通过域名来访问，否则需要端口转发。
   ingress:
     main:
       enabled: true

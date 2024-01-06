@@ -11,6 +11,9 @@ spec:
         image: xiaoyaliu/glue
         imagePullPolicy: Always
         command: ['/update.sh']
+        env:
+          - name: LANG
+            value: C.UTF-8
 
         volumeMounts:
           - name: xiaoya-data

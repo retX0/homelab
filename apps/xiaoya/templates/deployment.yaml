@@ -1,0 +1,99 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "xiaoya.fullname" . }}
+  labels:
+    {{- include "xiaoya.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "xiaoya.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "xiaoya.selectorLabels" . | nindent 8 }}
+    spec:
+      initContainers:
+        - name: init-container
+          image: busybox
+          command: ['/bin/sh', '-c']
+          args:
+            - echo "https://xiaoya.qos.cc" > /data/docker_address.txt &&
+              echo "$TOKEN" > /data/mytoken.txt &&
+              echo "$OPEN_TOKEN" > /data/myopentoken.txt &&
+              echo "$FOLDER_ID" > /data/temp_transfer_folder_id.txt
+          env:
+            - name: TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: xiaoya-token
+                  key: token 
+            - name: FOLDER_ID
+              valueFrom:
+                secretKeyRef:
+                  name: xiaoya-token
+                  key: folder-id 
+            - name: OPEN_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: xiaoya-token
+                  key: open_token
+          volumeMounts:
+          - name: xiaoya-data
+            mountPath: /data/
+            subPath: xiaoya
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "xiaoya.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 500
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          volumeMounts:
+            - name: xiaoya-data
+              mountPath: /data/
+              subPath: xiaoya
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      volumes:
+        - name: xiaoya-data
+          persistentVolumeClaim:
+            claimName: pvc-config
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

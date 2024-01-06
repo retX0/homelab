@@ -1,0 +1,42 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: xiaoya-update
+  namespace: {{ .Release.Namespace }}
+spec:
+  template:
+    spec:
+      containers:
+      - name: update-meta-info
+        image: xiaoyaliu/glue
+        imagePullPolicy: Always
+        command: ['/update.sh']
+
+        volumeMounts:
+          - name: xiaoya-data
+            mountPath: /etc/xiaoya
+            subPath: xiaoya
+          - name: media
+            mountPath: /media
+            subPath: Cloud
+
+    #   - name: update-strm
+    #     image: xiaoyaliu/glue:python
+    #     imagePullPolicy: Always
+
+    #     volumeMounts:
+    #       - name: xiaoya-data
+    #         mountPath: /data/
+    #         subPath: xiaoya
+    #       - name: media
+    #         mountPath: /media/
+    #         subPath: Cloud
+
+      restartPolicy: Never
+      volumes:
+        - name: xiaoya-data
+          persistentVolumeClaim:
+            claimName: pvc-config
+        - name: media
+          persistentVolumeClaim:
+            claimName: nfs-downloads

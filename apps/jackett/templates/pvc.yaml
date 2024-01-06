@@ -2,6 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: jackett-config
+  namespace: {{ .Release.Namespace }}
 spec:
   accessModes:
     - ReadWriteMany
@@ -9,4 +10,4 @@ spec:
   resources:
     requests:
       storage: 4Gi
-  volumeName: nfs-config2
+  volumeName: {{ .Release.Namespace }}-nfs-config

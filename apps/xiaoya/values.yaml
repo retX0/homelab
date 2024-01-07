@@ -38,22 +38,10 @@ ingress:
       paths:
         - path: /
           pathType: Prefix
-    - host: &emby_host emby-xiaoya.qos.cc
-      paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: emby-service
-              port:
-                number: 2345
   tls: 
    - secretName: xiaoya-tls-certificate
      hosts:
        - *host
-   - secretName: emby-xiaoya-tls-certificate
-     hosts:
-       - *emby_host
 
 resources: {}
 

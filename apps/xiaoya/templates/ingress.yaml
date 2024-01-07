@@ -59,3 +59,29 @@ spec:
           {{- end }}
     {{- end }}
 {{- end }}
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: port1-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/tls-acme: "false"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  rules:
+  tls:
+  - hosts:
+      - &host cloud-emby.qos.c
+    secretName: cloud-emby-tls
+  - host: *host
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: xiaoya-port1
+            port:
+              number: 80

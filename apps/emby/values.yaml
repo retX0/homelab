@@ -6,6 +6,7 @@ replicaCount: 1
 
 image:
   repository: emby/embyserver
+  pullPolicy: Always
 
 serviceAccount:
   # Specifies whether a service account should be created

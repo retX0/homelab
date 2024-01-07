@@ -1,45 +1,34 @@
 apiVersion: batch/v1
-kind: Job
+kind: CronJob
 metadata:
   name: xiaoya-update
   namespace: {{ .Release.Namespace }}
 spec:
-  template:
+  schedule: '0 4 */3 * *'
+  jobTemplate:
     spec:
-      containers:
-      - name: update-meta-info
-        image: xiaoyaliu/glue
-        imagePullPolicy: Always
-        command: ['/update.sh']
-        env:
-          - name: LANG
-            value: C.UTF-8
-
-        volumeMounts:
-          - name: xiaoya-data
-            mountPath: /etc/xiaoya
-            subPath: xiaoya
-          - name: media
-            mountPath: /media
-            subPath: Cloud
-
-    #   - name: update-strm
-    #     image: xiaoyaliu/glue:python
-    #     imagePullPolicy: Always
-
-    #     volumeMounts:
-    #       - name: xiaoya-data
-    #         mountPath: /data/
-    #         subPath: xiaoya
-    #       - name: media
-    #         mountPath: /media/
-    #         subPath: Cloud
-
-      restartPolicy: Never
-      volumes:
-        - name: xiaoya-data
-          persistentVolumeClaim:
-            claimName: pvc-config
-        - name: media
-          persistentVolumeClaim:
-            claimName: nfs-downloads
+      template:
+        spec:
+          containers:
+          - name: update-meta-info
+            image: xiaoyaliu/glue
+            imagePullPolicy: Always
+            command: ['/update.sh']
+            env:
+              - name: LANG
+                value: C.UTF-8
+            volumeMounts:
+              - name: xiaoya-data
+                mountPath: /etc/xiaoya
+                subPath: xiaoya
+              - name: media
+                mountPath: /media
+                subPath: Cloud
+          restartPolicy: Never
+          volumes:
+            - name: xiaoya-data
+              persistentVolumeClaim:
+                claimName: pvc-config
+            - name: media
+              persistentVolumeClaim:
+                claimName: nfs-downloads

@@ -17,10 +17,13 @@ nginx:
     extraHosts:
       - name: &pve_host pve.qos.cc
         path: /
+      - name: &cloud_emby_host emby2.qos.cc
+        path: /
     extraTls:
-      - secretName: nginx-local-tls
+      - secretName: nginx-tls
         hosts: 
           - *pve_host
+          - *cloud_emby_host
   extraVolumeMounts:
     - name: conf
       mountPath: /opt/bitnami/nginx/conf/server_blocks/

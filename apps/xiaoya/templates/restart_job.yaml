@@ -1,7 +1,7 @@
 kind: ServiceAccount
 apiVersion: v1
 metadata:
-  name: restart-deploy
+  name: restart-deployment
   namespace: {{ .Release.Namespace }}
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -12,7 +12,6 @@ metadata:
 rules:
   - apiGroups: ["apps", "extensions"]
     resources: ["deployments"]
-    resourceNames: ["test-pod"]
     verbs: ["get", "patch", "list", "watch"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -55,30 +54,3 @@ spec:
                 - 'rollout'
                 - 'restart'
                 - 'deployment/xiaoya'
----
-apiVersion: batch/v1
-kind: CronJob
-metadata:
-  name: update-xiaoya-media-info
-  namespace: {{ .Release.Namespace }}
-spec:
-  successfulJobsHistoryLimit: 1
-  failedJobsHistoryLimit: 2
-  concurrencyPolicy: Forbid
-  schedule: '0 4 */3 * *'
-  jobTemplate:
-    spec:
-      backoffLimit: 2 
-      activeDeadlineSeconds: 600 
-      template:
-        spec:
-          serviceAccountName: restart-deployment
-          restartPolicy: Never
-          containers:
-            - name: kubectl
-              image: bitnami/kubectl 
-              command:
-                - 'kubectl'
-                - 'rollout'
-                - 'restart'
-                - 'job/xiaoya-update'

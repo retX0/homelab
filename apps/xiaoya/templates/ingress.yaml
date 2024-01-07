@@ -83,4 +83,4 @@ spec:
           service:
             name: xiaoya-port1
             port:
-              number: 80
+              number: 2345

@@ -23,7 +23,7 @@ nginx:
           - *pve_host
   extraVolumeMounts:
     - name: conf
-      mountPath: /opt/bitnami/nginx/conf/bitnami/
+      mountPath: /opt/bitnami/nginx/conf/server_blocks/
   extraVolumes:
     - name: conf
       persistentVolumeClaim:

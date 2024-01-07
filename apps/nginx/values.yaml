@@ -21,5 +21,24 @@ nginx:
       - secretName: nginx-local-tls
         hosts: 
           - *pve_host
+  extraVolumeMounts:
+    - name: conf
+      mountPath: /opt/bitnami/nginx/conf/bitnami/
+  extraVolumes:
+    - name: conf
+      persistentVolumeClaim:
+        claimName: config
+
   service:
     type: LoadBalancer
+  initContainers:
+    - name: setup-conf
+      image: busybox
+      command: ['/bin/sh', '-c']
+      args:
+        - cd /tmp &&
+          wget https://git.qos.cc/api/v1/repos/ops/nginx/archive/main.zip &&
+          unzip main.zip && cp -rf /tmp/nginx/* /opt/conf
+      volumeMounts:
+        - name: conf
+          mountPath: /opt/conf

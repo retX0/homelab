@@ -70,11 +70,11 @@ metadata:
     kubernetes.io/tls-acme: "false"
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
 spec:
-  rules:
   tls:
-  - hosts:
+    - hosts:
       - &host cloud-emby.qos.c
     secretName: cloud-emby-tls
+  rules:
   - host: *host
     http:
       paths:

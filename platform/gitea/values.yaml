@@ -22,7 +22,7 @@ gitea:
       APP_NAME: "Let's code."
       database:
         DB_TYPE: postgres
-        HOST: postgresql.postgresql.svc.cluster.local:5432
+        HOST: database-postgresql.database.svc.cluster.local:5432
         NAME: gitea
         USER: gitea
         PASSWD: gitea

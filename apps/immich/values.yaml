@@ -28,7 +28,7 @@ immich:
     resources:
       limits:
         gpu.intel.com/i915: 1
-  proxy:
+  server:
     ingress:
       main:
         enabled: true

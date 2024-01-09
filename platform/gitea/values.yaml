@@ -26,6 +26,12 @@ gitea:
         NAME: gitea
         USER: gitea
         PASSWD: gitea
+      cache:
+        ADAPTER: redis
+        HOST: redis://database-redis-headless.database.svc.cluster.local:6379/2?pool_size=100&idle_timeout=180s
+      queue:
+        TYPE: redis
+        CONN_STR: redis://database-redis-headless.database.svc.cluster.local:6379/2
       service:
         DISABLE_REGISTRATION: true
         DEFAULT_USER_VISIBILITY: limited

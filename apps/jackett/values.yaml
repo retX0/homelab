@@ -37,4 +37,4 @@ flaresolverr:
   image:
     repository: ghcr.io/flaresolverr/flaresolverr
     pullPolicy: IfNotPresent
-    tag: v3.3.6
+    tag: v3.3.13

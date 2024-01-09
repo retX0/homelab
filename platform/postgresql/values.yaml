@@ -8,3 +8,9 @@ postgresql:
     name: primary 
     service:
       type: LoadBalancer
+redis:
+  architecture: standalone
+  auth:
+    enabled: false
+  persistence:
+    storageClass: "longhorn"

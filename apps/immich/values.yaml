@@ -1,19 +1,10 @@
 immich:
-  image:
-    tag: v1.79.1
-  postgresql:
-    enabled: true
-    global:
-      postgresql:
-        auth:
-          username: immich
-          database: immich
-          password: immich
-  redis:
-    enabled: true
-    architecture: standalone
-    auth:
-      enabled: false
+  env:
+    REDIS_HOSTNAME: "database-redis-headless.database.svc.cluster.local"
+    DB_HOSTNAME: "database-postgresql.database.svc.cluster.local"
+    DB_USERNAME: "immich"
+    DB_DATABASE_NAME: "immich"
+    DB_PASSWORD: "immich"
   immich:
     persistence:
       library:

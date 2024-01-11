@@ -31,8 +31,8 @@ ingress:
   enabled: enable
   annotations:
     kubernetes.io/ingress.class: nginx
-    kubernetes.io/tls-acme: "false"
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    hajimari.io/enable: 'false'
   hosts:
     - host: &host xiaoya.qos.cc
       paths:

@@ -20,11 +20,7 @@ frigate:
           - *host
   config: |
     ffmpeg:
-      hwaccel_args:
-        - -hwaccel
-        - vaapi
-        - -hwaccel_device
-        - /dev/dri/renderD128
+      hwaccel_args: preset-intel-qsv-h264
     mqtt:
       host: 172.23.31.35
       port: 1883

@@ -9,6 +9,8 @@ freshrss:
       annotations:
         kubernetes.io/ingress.class: nginx
         cert-manager.io/cluster-issuer: letsencrypt-prod
+        hajimari.io/icon: "rss"
+        hajimari.io/appName: "rss"
       hosts:
         - host: &host rss.qos.cc
           paths:

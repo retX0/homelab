@@ -24,4 +24,8 @@ unifi:
     data:
       enabled: true
       existingClaim: config
+video:
+  ingress:
+    enabled: true
+
 

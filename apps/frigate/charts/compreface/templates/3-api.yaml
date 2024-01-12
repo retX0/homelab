@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: api
+  name: {{ .Values.api.name }}
+spec:
+  replicas: {{ .Values.api.replicas }}
+  selector:
+    matchLabels:
+      app: api
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      dnsPolicy: ClusterFirst
+      containers:
+        - name: {{ .Values.api.name }}
+          image: '{{ .Values.api.repository }}:{{ .Values.app.version }}'
+          ports:
+            - containerPort: {{ .Values.api.port }}
+          env:
+            - name: POSTGRES_USER
+              value: '{{ .Values.postgres.db_user }}'
+            - name: POSTGRES_PASSWORD
+              value: '{{ .Values.postgres.db_password }}'
+            - name: POSTGRES_URL
+              value: 'jdbc:postgresql://{{ .Values.postgres.db_host }}:{{ .Values.postgres.db_port }}/{{ .Values.postgres.db_name }}'
+            - name: SPRING_PROFILES_ACTIVE
+              value: 'dev'
+            - name: API_JAVA_OPTS
+              value: '-Xmx8g'
+            - name: SAVE_IMAGES_TO_DB
+              value: 'true'
+            - name: MAX_FILE_SIZE
+              value: '{{ .Values.app.max_upload_size }}MB'
+            - name: MAX_REQUEST_SIZE
+              value: '{{ .Values.app.max_request_size }}MB'
+            - name: CONNECTION_TIMEOUT
+              value: "10000"
+            - name: READ_TIMEOUT
+              value: "60000"
+      restartPolicy: Always

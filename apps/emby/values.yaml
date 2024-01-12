@@ -47,4 +47,5 @@ autoscaling:
 resources:
   limits:
     cpu: "40m"
-
+  requests:
+    gpu.intel.com/i915: 1

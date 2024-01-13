@@ -2,8 +2,6 @@ nginx:
   image:
     registry: ghcr.io
     repository: retx0/bitnami-nginx
-    tag: main
-    pullPolicy: Always
   env:
     TZ: Asia/Shanghai
   ingress:

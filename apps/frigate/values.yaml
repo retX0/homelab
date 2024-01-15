@@ -28,6 +28,10 @@ frigate:
       topic_prefix: frigate
       client_id: frigate
       stats_interval: 60
+    detectors:
+      coral:
+        type: edgetpu
+        device: usb
     cameras:
       door:
         ffmpeg:

@@ -3,6 +3,7 @@
 frigate:
   env:
     TZ: Asia/Shanghai
+    FRIGATE_RTSP_PASSWORD: WjNFxge4HbpTV6sWupdz7xn4
   ingress:
     enabled: true
     annotations:
@@ -41,7 +42,7 @@ frigate:
       door2:
         ffmpeg:
           inputs:
-            - path: rtsp://172.23.31.41:554/stream1
+            - path: rtsp://admin:{FRIGATE_RTSP_PASSWORD}@172.23.31.41:554/stream1
               roles:
                 - detect
         detect:

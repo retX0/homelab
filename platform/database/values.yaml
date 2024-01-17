@@ -3,7 +3,9 @@ postgresql:
     storageClass: "longhorn"
     postgresql:
       auth:
-        postgresPassword: "amaretto-snowplow-reps"
+        existingSecret: postgresql-auth
+        secretKeys:
+          adminPasswordKey: "adminPassword"
   primary:
     name: primary 
     service:

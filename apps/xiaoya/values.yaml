@@ -52,8 +52,8 @@ autoscaling:
   maxReplicas: 100
   targetCPUUtilizationPercentage: 80
 
-nodeSelector: 
-  kubernetes.io/hostname: lab
+# nodeSelector: 
+#   kubernetes.io/hostname: lab
 
 tolerations: []
 

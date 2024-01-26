@@ -46,6 +46,8 @@ spec:
               value: "Asia/Shanghai"
             - name: UMASK
               value: "022"
+            - name: PERMS
+              value: "false"
           livenessProbe:
             httpGet:
               path: /

@@ -37,7 +37,7 @@ spec:
   successfulJobsHistoryLimit: 1
   failedJobsHistoryLimit: 2
   concurrencyPolicy: Forbid
-  schedule: '0 3 */3 * *'
+  schedule: '0 6 */9 * *'
   jobTemplate:
     spec:
       backoffLimit: 2 

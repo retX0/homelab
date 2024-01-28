@@ -4,7 +4,7 @@ metadata:
   name: xiaoya-update
   namespace: {{ .Release.Namespace }}
 spec:
-  schedule: '0 4 */3 * *'
+  schedule: '0 2 */9 * *'
   jobTemplate:
     spec:
       template:

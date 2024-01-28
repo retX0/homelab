@@ -8,7 +8,7 @@ image:
   repository: allanpk716/chinesesubfinder
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v0.55.2"
+  tag: "v0.55.3"
 
 imagePullSecrets: []
 nameOverride: ""

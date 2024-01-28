@@ -100,6 +100,12 @@ hajimari:
             url: https://app.terraform.io
           - name: Cloudflare
             url: https://dash.cloudflare.com
+      - group: Camera
+        bookmarks:
+          - name: Compreface
+            url: https://compreface.qos.cc
+          - name: Double Take
+            url: https://double-take.qos.cc
       - group: Github
         bookmarks:
           - name: Me

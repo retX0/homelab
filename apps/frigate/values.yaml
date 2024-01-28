@@ -91,6 +91,7 @@ double-take:
       annotations:
         kubernetes.io/ingress.class: nginx
         cert-manager.io/cluster-issuer: letsencrypt-prod
+        hajimari.io/enable: 'false'
       hosts:
         - host: &host double-take.qos.cc
           paths:
@@ -130,6 +131,7 @@ compreface:
     annotations:
       kubernetes.io/ingress.class: nginx
       cert-manager.io/cluster-issuer: letsencrypt-prod
+      hajimari.io/enable: 'false'
     hosts:
       - host: &host compreface.qos.cc
         paths:

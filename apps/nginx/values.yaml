@@ -29,7 +29,8 @@ nginx:
     - name: conf
       persistentVolumeClaim:
         claimName: config
-
+  networkPolicy:
+    enabled: false
   service:
     type: LoadBalancer
   initContainers:

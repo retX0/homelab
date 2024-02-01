@@ -1,11 +1,5 @@
 n8n:
-  config:
-    database:
-      type: 'postgresdb'
-      host: database-postgresql.database.svc.cluster.local
-      user: n8n
-    generic:
-      timezone: "Asia/Shanghai"
+  existingSecret: n8n-config
   ingress:
     enabled: true
     annotations:
@@ -13,12 +7,11 @@ n8n:
       cert-manager.io/cluster-issuer: letsencrypt-prod
       hajimari.io/icon: "puzzle"
     hosts:
-      - host: &host double-take.qos.cc
+      - host: &host n8n.qos.cc
         paths:
-          - path: /
-            pathType: Prefix
+          - /
     tls:
-      - secretName: double-take-tls-certificate
+      - secretName: n8n-tls-certificate
         hosts:
           - *host
   persistence:

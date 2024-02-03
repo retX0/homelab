@@ -6,5 +6,5 @@ dependencies:
   version: 14.0.0
   repository: https://charts.bitnami.com/bitnami
 - name: redis
-  version: 18.11.0
+  version: 18.12.0
   repository: https://charts.bitnami.com/bitnami

@@ -63,13 +63,10 @@ frigate:
         retain:
           default: 14
           mode: active_objects
-  extraVolumes:
-    - name: media
-      persistentVolumeClaim:
-        claimName: nfs-frigate
-  extraVolumeMounts:
-    - name: media
-      mountPath: /media
+  persistence:
+    media:
+      enabled: true
+      existingClaim: nfs-frigate
   securityContext:
     privileged: true
     capabilities:

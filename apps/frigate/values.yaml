@@ -57,7 +57,7 @@ frigate:
     record:
       enabled: True
       retain:
-        days: 30
+        days: 10
         mode: all
       events:
         retain:

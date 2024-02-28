@@ -44,8 +44,7 @@ qbittorrent:
       memory: 2Gi
 overseerr:
   image:
-    tag: latest
-    imagePullPolicy: Always
+    tag: v1.33.2 
   env:
     PUID: 2199
     PGID: 568

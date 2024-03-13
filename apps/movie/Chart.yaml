@@ -2,9 +2,9 @@ apiVersion: v2
 name: movie
 version: 0.0.0
 dependencies:
-- name: qbittorrent
-  version: 14.1.0
-  repository: https://k8s-home-lab.github.io/helm-charts/
+# - name: qbittorrent
+#   version: 14.1.0
+#   repository: https://k8s-home-lab.github.io/helm-charts/
 - name: overseerr
   version: 5.4.2
   repository: https://k8s-at-home.com/charts/

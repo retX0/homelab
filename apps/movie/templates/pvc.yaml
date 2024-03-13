@@ -14,12 +14,12 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: pvc-config
+  name: config
+  namespace: {{ .Release.Namespace }}
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: ""
+  storageClassName: "longhorn"
   resources:
     requests:
-      storage: 30Gi
-  volumeName: nfs-config
+      storage: 20Gi

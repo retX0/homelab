@@ -27,7 +27,7 @@ qbittorrent:
       enabled: true
       mountPath: /config
       subPath: qbittorrent
-      existingClaim: pvc-config
+      existingClaim: config
       retain: true
     downloads:
       enabled: true
@@ -71,8 +71,8 @@ overseerr:
     config:
       enabled: true
       mountPath: /app/config
-      subPath: movie_tools/overseerr
-      existingClaim: pvc-config
+      subPath: overseerr
+      existingClaim: config
 sonarr:
   env:
     TZ: Asia/Shanghai
@@ -102,8 +102,8 @@ sonarr:
     config:
       enabled: true
       mountPath: /config
-      subPath: movie_tools/sonarr
-      existingClaim: pvc-config
+      subPath: sonarr
+      existingClaim: config
       retain: true
     media:
       enabled: true
@@ -138,8 +138,8 @@ radarr:
     config:
       enabled: true
       mountPath: /config
-      subPath: movie_tools/radarr
-      existingClaim: pvc-config
+      subPath: radarr
+      existingClaim: config
       retain: true
     media:
       enabled: true

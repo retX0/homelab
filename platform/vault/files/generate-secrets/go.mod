@@ -3,7 +3,7 @@ module git.qos.cc/khuedoan/homelab/vault/init
 go 1.19
 
 require (
-	github.com/hashicorp/vault/api v1.12.0
+	github.com/hashicorp/vault/api v1.12.1
 	github.com/sethvargo/go-password v0.2.0
 	gopkg.in/yaml.v2 v2.4.0
 )

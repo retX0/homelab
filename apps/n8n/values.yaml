@@ -25,7 +25,7 @@ n8n:
       timezone: "Asia/Shanghai"
     host: *host
   extraEnv:
-    WEBHOOK_TUNNEL_URL: "https://n8n.qos.cc"
+    WEBHOOK_URL: "https://n8n.qos.cc"
   persistence:
     enabled: true
     accessMode: ReadWriteOnce

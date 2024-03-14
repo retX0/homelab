@@ -1,4 +1,5 @@
 n8n:
+  domain: n8n.qos.cc
   existingSecret: n8n-config
   ingress:
     enabled: true
@@ -14,6 +15,17 @@ n8n:
       - secretName: n8n-tls-certificate
         hosts:
           - *host
+  config:
+    database:
+      type: postgresdb
+      postgresdb:
+        host: database-postgresql.database.svc.cluster.local
+        user: "n8n"
+    generic:
+      timezone: "Asia/Shanghai"
+    host: *host
+  extraEnv:
+    WEBHOOK_TUNNEL_URL: "https://n8n.qos.cc"
   persistence:
     enabled: true
     accessMode: ReadWriteOnce

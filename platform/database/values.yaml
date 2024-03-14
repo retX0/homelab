@@ -10,9 +10,13 @@ postgresql:
     name: primary 
     service:
       type: LoadBalancer
+    persistence:
+      existingClaim: data
+      subPath: postgresql
 redis:
   architecture: standalone
   auth:
     enabled: false
   persistence:
-    storageClass: "longhorn"
+    existingClaim: data
+    subPath: redis

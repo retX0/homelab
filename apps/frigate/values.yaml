@@ -58,7 +58,7 @@ frigate:
       enabled: True
       retain:
         days: 10
-        mode: all
+        mode: motion
       events:
         retain:
           default: 14

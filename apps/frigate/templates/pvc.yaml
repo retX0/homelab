@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: nfs-frigate
+  name: video-recording
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: ""
+  storageClassName: "manual"
   resources:
     requests:
-      storage: 1024Gi
-  volumeName: nfs-frigate
+      storage: 350Gi
+  volumeName: video-recording

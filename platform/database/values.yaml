@@ -13,6 +13,16 @@ postgresql:
     persistence:
       existingClaim: data
       subPath: postgresql
+mysql:
+  auth:
+    existingSecret: mysql-auth
+  primary:
+    name: primary 
+    service:
+      type: LoadBalancer
+    persistence:
+      existingClaim: data
+      subPath: mysql
 redis:
   architecture: standalone
   auth:

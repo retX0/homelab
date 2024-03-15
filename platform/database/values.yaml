@@ -1,4 +1,7 @@
 postgresql:
+  image:
+    registry: ghcr.io
+    repository: retx0/bitnami-postgresql
   global:
     storageClass: "longhorn"
     postgresql:

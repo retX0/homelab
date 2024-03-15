@@ -1,5 +1,6 @@
 immich:
   env:
+    DB_VECTOR_EXTENSION: "pgvector"
     REDIS_HOSTNAME: "database-redis-headless.database.svc.cluster.local"
     DB_HOSTNAME: "database-postgresql.database.svc.cluster.local"
     DB_USERNAME: "immich"

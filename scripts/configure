@@ -14,13 +14,12 @@ import sys
 from rich.prompt import Confirm, Prompt
 
 upstream_config = {
-    "seed_repo": "https://github.com/khuedoan/homelab",
-    "domain": "khuedoan.com",
-    "timezone": "Asia/Ho_Chi_Minh",
+    "seed_repo": "https://github.com/retx0/homelab",
+    "domain": "qos.cc",
+    "timezone": "Asia/Shanghai",
     "terraform_workspace": "khuedoan",
-    "loadbalancer_ip_range": "192.168.1.224/27",
+    "loadbalancer_ip_range": "172.23.29.224/27",
 }
-
 
 def check_python_version(required_version: str) -> None:
     if sys.version_info < tuple(map(int, required_version.split('.'))):
@@ -87,7 +86,8 @@ def main() -> None:
         pattern=upstream_config['loadbalancer_ip_range'],
         replacement=loadbalancer_ip_range,
         paths=[
-            "system/metallb-system/templates/ipaddresspool.yaml",
+            "metal/group_vars/all.yml",
+            "external/main.tf",
         ]
     )
 

@@ -13,7 +13,8 @@ It can be used as a highly customizable framework to build your own homelab.
 > **What is a homelab?**
 >
 > Homelab is a laboratory at home where you can self-host, experiment with new technologies, practice for certifications, and so on.
-> For more information about homelab in general, see the [r/homelab introduction](https://www.reddit.com/r/homelab/wiki/introduction).
+> For more information, please see the [r/homelab introduction](https://www.reddit.com/r/homelab/wiki/introduction) and the
+> [Home Operations Discord community](https://discord.gg/home-operations) (formerly known as [k8s-at-home](https://k8s-at-home.com)).
 
 ## Overview
 
@@ -38,7 +39,7 @@ More information can be found in [the roadmap](#roadmap) below.
 
 ### Features
 
-- [x] Common applications: Gitea, Seafile, Jellyfin, Paperless...
+- [x] Common applications: Gitea, Jellyfin, Paperless...
 - [x] Automated bare metal provisioning with PXE boot
 - [x] Automated Kubernetes installation and management
 - [x] Installing and managing applications using GitOps
@@ -53,9 +54,9 @@ More information can be found in [the roadmap](#roadmap) below.
 - [x] Private container registry
 - [x] Distributed storage
 - [x] Support multiple environments (dev, prod)
-- [ ] Monitoring and alerting 🚧
+- [x] Monitoring and alerting
 - [ ] Automated offsite backups 🚧
-- [ ] Single sign-on 🚧
+- [x] Single sign-on
 - [x] Infrastructure testing
 
 Some demo videos and screenshots are shown here.
@@ -68,32 +69,29 @@ They can't capture all the project's features, but they are sufficient to get a 
 | [![][pxe-demo]](https://www.youtube.com/watch?v=y-d7btNNAT8)                                |
 | PXE boot                                                                                    |
 | [![][homepage-demo]][homepage-demo]                                                         |
-| Homepage with Ingress discovery powered by [Hajimari](https://github.com/toboshii/hajimari) |
+| Homepage powered by... [Homepage](https://gethomepage.dev)                                  |
 | [![][grafana-demo]][grafana-demo]                                                           |
-| Monitoring dashboard powered by [Grafana](https://grafana.com/)                             |
+| Monitoring dashboard powered by [Grafana](https://grafana.com)                              |
 | [![][gitea-demo]][gitea-demo]                                                               |
-| Git server powered by [Gitea](https://gitea.io/en-us/)                                      |
+| Git server powered by [Gitea](https://gitea.io/en-us)                                       |
 | [![][matrix-demo]][matrix-demo]                                                             |
 | [Matrix](https://matrix.org/) chat server                                                   |
-| [![][tekton-demo]][tekton-demo]                                                             |
-| Continuous integration with [Tekton](https://tekton.dev/)                                   |
+| [![][woodpecker-demo]][woodpecker-demo]                                                     |
+| Continuous integration with [Woodpecker CI](https://woodpecker-ci.org)                      |
 | [![][argocd-demo]][argocd-demo]                                                             |
-| Continuous deployment with [ArgoCD](https://argoproj.github.io/cd/)                         |
+| Continuous deployment with [ArgoCD](https://argoproj.github.io/cd)                          |
 | [![][lens-demo]][lens-demo]                                                                 |
-| Cluster management using [Lens](https://k8slens.dev/)                                       |
-| [![][vault-demo]][vault-demo]                                                               |
-| Secret management with [Vault](https://www.vaultproject.io/)                                |
+| Cluster management using [Lens](https://k8slens.dev)                                        |
 
 [deploy-demo]: https://asciinema.org/a/xkBRkwC6e9RAzVuMDXH3nGHp7.svg
 [pxe-demo]: https://user-images.githubusercontent.com/27996771/157303477-df2e7410-8f02-4648-a86c-71e6b7e89e35.png
-[homepage-demo]: https://user-images.githubusercontent.com/27996771/149445807-0f869eb7-d8f5-4fef-ab97-ac281df91a06.png
-[grafana-demo]: https://user-images.githubusercontent.com/27996771/149446631-1c5d056b-1fdc-48e6-96ba-e1abe1762be0.png
-[gitea-demo]: https://user-images.githubusercontent.com/27996771/149444871-38889c9d-862f-41ff-8c05-8ece21da3e9c.png
+[homepage-demo]: https://github.com/khuedoan/homelab/assets/27996771/d0eaf620-be08-48d8-8420-40bcaa86093b
+[grafana-demo]: https://github.com/khuedoan/homelab/assets/27996771/ad937b26-e9bc-4761-83ae-1c7f512ea97f
+[gitea-demo]: https://github.com/khuedoan/homelab/assets/27996771/c245534f-88d9-4565-bde8-b39f60ccee9e
 [matrix-demo]: https://user-images.githubusercontent.com/27996771/149448510-7163310c-2049-4ccd-901d-f11f605bfc32.png
-[tekton-demo]: https://user-images.githubusercontent.com/27996771/149445374-58fd0605-bb9a-46e4-81d6-5e584d2b94a9.png
-[argocd-demo]: https://user-images.githubusercontent.com/27996771/149444716-fc0d7282-4cf7-4ddb-97a4-1a3fb47ff2b8.png
+[woodpecker-demo]: https://github.com/khuedoan/homelab/assets/27996771/5d887688-d20a-44c8-8f77-0c625527dfe4
+[argocd-demo]: https://github.com/khuedoan/homelab/assets/27996771/527e2529-4fe1-4664-ab8a-b9eb3c492d20
 [lens-demo]: https://user-images.githubusercontent.com/27996771/149448896-9d79947d-468c-45c6-a81d-b43654e8ab6b.png
-[vault-demo]: https://user-images.githubusercontent.com/27996771/149452309-de4a893b-e94c-4ba8-9119-ea87449cf77e.png
 
 ### Tech stack
 
@@ -109,7 +107,7 @@ They can't capture all the project's features, but they are sufficient to get a 
         <td>Automate bare metal provisioning and configuration</td>
     </tr>
     <tr>
-        <td><img width="32" src="https://cncf-branding.netlify.app/img/projects/argo/icon/color/argo-icon-color.svg"></td>
+        <td><img width="32" src="https://avatars.githubusercontent.com/u/30269780"></td>
         <td><a href="https://argoproj.github.io/cd">ArgoCD</a></td>
         <td>GitOps tool built to deploy applications to Kubernetes</td>
     </tr>
@@ -117,6 +115,11 @@ They can't capture all the project's features, but they are sufficient to get a 
         <td><img width="32" src="https://github.com/jetstack/cert-manager/raw/master/logo/logo.png"></td>
         <td><a href="https://cert-manager.io">cert-manager</a></td>
         <td>Cloud native certificate management</td>
+    </tr>
+    <tr>
+        <td><img width="32" src="https://avatars.githubusercontent.com/u/21054566?s=200&v=4"></td>
+        <td><a href="https://cilium.io">Cilium</a></td>
+        <td>eBPF-based Networking, Observability and Security (CNI, LB, Network Policy, etc.)</td>
     </tr>
     <tr>
         <td><img width="32" src="https://avatars.githubusercontent.com/u/314135?s=200&v=4"></td>
@@ -151,20 +154,25 @@ They can't capture all the project's features, but they are sufficient to get a 
     <tr>
         <td><img width="32" src="https://grafana.com/static/img/menu/grafana2.svg"></td>
         <td><a href="https://grafana.com">Grafana</a></td>
-        <td>Operational dashboards</td>
+        <td>Observability platform</td>
     </tr>
     <tr>
-        <td><img width="32" src="https://cncf-branding.netlify.app/img/projects/helm/icon/color/helm-icon-color.svg"></td>
+        <td><img width="32" src="https://helm.sh/img/helm.svg"></td>
         <td><a href="https://helm.sh">Helm</a></td>
         <td>The package manager for Kubernetes</td>
     </tr>
     <tr>
-        <td><img width="32" src="https://cncf-branding.netlify.app/img/projects/k3s/icon/color/k3s-icon-color.svg"></td>
+        <td><img width="32" src="https://avatars.githubusercontent.com/u/49319725"></td>
         <td><a href="https://k3s.io">K3s</a></td>
         <td>Lightweight distribution of Kubernetes</td>
     </tr>
     <tr>
-        <td><img width="32" src="https://cncf-branding.netlify.app/img/projects/kubernetes/icon/color/kubernetes-icon-color.svg"></td>
+        <td><img width="32" src="https://kanidm.com/images/logo.svg"></td>
+        <td><a href="https://kanidm.com">Kanidm</a></td>
+        <td>Modern and simple identity management platform</td>
+    </tr>
+    <tr>
+        <td><img width="32" src="https://avatars.githubusercontent.com/u/13629408"></td>
         <td><a href="https://kubernetes.io">Kubernetes</a></td>
         <td>Container-orchestration system, the backbone of this project</td>
     </tr>
@@ -174,14 +182,9 @@ They can't capture all the project's features, but they are sufficient to get a 
         <td>Log aggregation system</td>
     </tr>
     <tr>
-        <td><img width="32" src="https://cncf-branding.netlify.app/img/projects/longhorn/icon/color/longhorn-icon-color.svg"></td>
+        <td><img width="32" src="https://longhorn.io/img/logos/longhorn-icon-white.png"></td>
         <td><a href="https://longhorn.io">Longhorn</a></td>
         <td>Cloud native distributed block storage for Kubernetes</td>
-    </tr>
-    <tr>
-        <td><img width="32" src="https://avatars.githubusercontent.com/u/60239468?s=200&v=4"></td>
-        <td><a href="https://metallb.org">MetalLB</a></td>
-        <td>Bare metal load-balancer for Kubernetes</td>
     </tr>
     <tr>
         <td><img width="32" src="https://avatars.githubusercontent.com/u/1412239?s=200&v=4"></td>
@@ -189,7 +192,12 @@ They can't capture all the project's features, but they are sufficient to get a 
         <td>Kubernetes Ingress Controller</td>
     </tr>
     <tr>
-        <td><img width="32" src="https://cncf-branding.netlify.app/img/projects/prometheus/icon/color/prometheus-icon-color.svg"></td>
+        <td><img width="32" src="https://ntfy.sh/_next/static/media/logo.077f6a13.svg"></td>
+        <td><a href="https://ntfy.sh">ntfy</a></td>
+        <td>Notification service to send notifications to your phone or desktop</td>
+    </tr>
+    <tr>
+        <td><img width="32" src="https://avatars.githubusercontent.com/u/3380462"></td>
         <td><a href="https://prometheus.io">Prometheus</a></td>
         <td>Systems monitoring and alerting toolkit</td>
     </tr>
@@ -199,14 +207,9 @@ They can't capture all the project's features, but they are sufficient to get a 
         <td>Automatically update dependencies</td>
     </tr>
     <tr>
-        <td><img width="32" src="https://avatars.githubusercontent.com/u/47602533?s=200&v=4"></td>
-        <td><a href="https://tekton.dev">Tekton</a></td>
-        <td>Cloud native solution for building CI/CD systems</td>
-    </tr>
-    <tr>
-        <td><img width="32" src="https://simpleicons.org/icons/vault.svg"></td>
-        <td><a href="https://www.vaultproject.io">Vault</a></td>
-        <td>Secrets and encryption management system</td>
+        <td><img width="32" src="https://avatars.githubusercontent.com/u/84780935?s=200&v=4"></td>
+        <td><a href="https://woodpecker-ci.org">Woodpecker CI</a></td>
+        <td>Simple yet powerful CI/CD engine with great extensibility</td>
     </tr>
     <tr>
         <td><img width="32" src="https://docs.zerotier.com/img/ZeroTierIcon.png"></td>
@@ -253,6 +256,9 @@ References:
 - [Pre-commit config from k8s-at-home/flux-cluster-template](https://github.com/k8s-at-home/flux-cluster-template)
 - [Diátaxis technical documentation framework](https://diataxis.fr)
 - [Official Terratest examples](https://github.com/gruntwork-io/terratest/tree/master/test)
+- [Self-host an automated Jellyfin media streaming stack](https://zerodya.net/self-host-jellyfin-media-streaming-stack)
+- [App Template Helm chart by bjw-s](https://bjw-s.github.io/helm-charts/docs/app-template)
+- [Various application configurations in onedr0p/home-ops](https://github.com/onedr0p/home-ops)
 
 Here is a list of the contributors who have helped to improve this project.
 Big shout-out to them!
@@ -268,6 +274,8 @@ Big shout-out to them!
 - ![](https://github.com/Bourne-ID.png?size=24) [@Bourne-ID](https://github.com/Bourne-ID)
 - ![](https://github.com/akwan.png?size=24) [@akwan](https://github.com/akwan)
 - ![](https://github.com/trangmaiq.png?size=24) [@trangmaiq](https://github.com/trangmaiq)
+- ![](https://github.com/raedkit.png?size=24) [@raedkit](https://github.com/raedkit)
+- ![](https://github.com/ClashTheBunny.png?size=24) [@ClashTheBunny](https://github.com/ClashTheBunny)
 
 If you feel you're missing from this list, feel free to add yourself in a PR.
 

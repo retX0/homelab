@@ -22,8 +22,8 @@ Good enough for tinkering and personal usage, and reasonably secure.
 - [x] Observability
     - [x] Monitoring
     - [x] Logging
-    - [ ] Alerting
-- [ ] SSO
+    - [x] Alerting
+- [x] SSO
 - [ ] Reasonably secure
     - [x] Automated certificate management
     - [x] Declarative secret management
@@ -36,8 +36,7 @@ Good enough for tinkering and personal usage, and reasonably secure.
     - [ ] 70% availability (might break in the weekend due to new experimentation)
 - [x] Core applications
     - [x] Gitea
-    - [x] Tekton
-    - [x] Vault
+    - [x] Woodpecker
     - [x] Private container registry
     - [x] Homepage
 
@@ -65,6 +64,7 @@ Can be used in "production" (for family or even small scale businesses).
     - [x] Book (this book)
     - [ ] Walkthrough tutorial and feature demo (video)
 - [x] Configuration script for new users
+- [ ] More dashboards and alert rules
 - [ ] SLOs:
     - [ ] 99,9% availability (less than 9 hours of downtime per year)
     - [ ] 99,99% data durability
@@ -73,7 +73,6 @@ Can be used in "production" (for family or even small scale businesses).
     - [ ] Matrix with bridges
     - [ ] VPN server
     - [ ] PeerTube
-    - [x] Seafile
     - [x] Blog
     - [ ] [Development dashboard](https://github.com/khuedoan/homelab-backstage)
 

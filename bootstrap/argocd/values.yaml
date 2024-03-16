@@ -3,7 +3,10 @@ argo-cd:
     extraArgs:
       - --insecure
     config:
-      statusbadge.enabled: 'true'
+      resource.ignoreResourceUpdatesEnabled: true
+      resource.customizations.ignoreResourceUpdates.all: |
+        jsonPointers:
+          - /status
       resource.customizations.health.argoproj.io_Application: |
         hs = {}
         hs.status = "Progressing"
@@ -22,8 +25,6 @@ argo-cd:
       ingressClassName: nginx
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod
-        hajimari.io/appName: ArgoCD
-        hajimari.io/icon: robot
       hosts:
         - &host argocd.qos.cc
       tls:

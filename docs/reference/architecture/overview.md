@@ -23,7 +23,7 @@ Main components:
 - `./metal`: bare metal management, install Linux and Kubernetes
 - `./bootstrap`: GitOps bootstrap with ArgoCD
 - `./system`: critical system components for the cluster (load balancer, storage, ingress, operation tools...)
-- `./platform`: essential components for service hosting platform (vault, git...)
+- `./platform`: essential components for service hosting platform (git, build runners, dashboards...)
 - `./apps`: user facing applications
 - `./external` (optional): externally managed services
 
@@ -48,7 +48,7 @@ Everything is automated, after you edit the configuration files, you just need t
 From now on, ArgoCD will do the rest:
 
 - (3) Build the `./system` layer (storage, networking, monitoring, etc)
-- (4) Build the `./platform` layer (Gitea, Vault, SSO, etc)
+- (4) Build the `./platform` layer (Gitea, Grafana, SSO, etc)
 - (5) Build the `./apps` layer: (Syncthing, Jellyfin, etc)
 
 ```mermaid
@@ -62,7 +62,6 @@ flowchart TD
   end
 
   subgraph system[./system]
-    metallb[MetalLB]
     nginx[NGINX]
     longhorn[Longhorn]
     cert-manager
@@ -81,16 +80,16 @@ flowchart TD
   cloudflare -.-> cloudflared
 
   subgraph platform
-    gitea[Gitea]
-    tekton[Tekton]
-    vault[Vault]
+    Gitea
+    Woodpecker
+    Grafana
   end
 
   subgraph apps
+    homepage[Homepage]
     jellyfin[Jellyfin]
     matrix[Matrix]
     paperless[Paperless]
-    seafile[Seafile]
   end
 
   make[Run make] -- 1 --> metal -- 2 --> bootstrap -. 3 .-> system -. 4 .-> platform -. 5 .-> apps
@@ -137,9 +136,7 @@ Below is the pseudo code for the entire process, you don't have to read it right
                 copy k3s config files
                 enable k3s service and form a cluster
                 create KUBECONFIG file
-                create MetalLB config:
-                    use the last /27 subnet of the network
-                    apply the config
+                install Cilium
         build ./bootstrap:
             install ArgoCD:
                 apply helm chart
@@ -168,7 +165,7 @@ Below is the pseudo code for the entire process, you don't have to read it right
                     migrate the homelab repository from GitHub
                     ArgoCD switch the source from GitHub to Gitea
                 ci
-                vault
+                dashboards
                 etc
             ./apps (depends on ./system and ./platform):
                 homepage

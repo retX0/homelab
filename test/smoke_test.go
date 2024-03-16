@@ -3,6 +3,7 @@ package test
 import (
 	"crypto/tls"
 	"fmt"
+	"os"
 	"testing"
 	"time"
 
@@ -18,9 +19,11 @@ func TestSmoke(t *testing.T) {
 		namespace string
 	}{
 		{"argocd-server", "argocd"},
-		{"hajimari", "hajimari"},
-		{"vault", "vault"},
 		{"gitea", "gitea"},
+		{"grafana", "grafana"},
+		{"homepage", "homepage"},
+		{"kanidm", "kanidm"},
+		{"registry-docker-registry", "registry"},
 	}
 
 	for _, app := range mainApps {
@@ -38,7 +41,7 @@ func TestSmoke(t *testing.T) {
 
 			// Setup a TLS configuration, ignore the certificate because we may not use cert-manager (like the sandbox environment)
 			tlsConfig := tls.Config{
-				InsecureSkipVerify: true,
+				InsecureSkipVerify: os.Getenv("INSECURE_SKIP_VERIFY") != "",
 			}
 
 			// Test the endpoint, this will only fail if we timeout waiting for the service to return a 200 response

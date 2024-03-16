@@ -39,7 +39,7 @@ nginx:
       command: ['/bin/sh', '-c']
       args:
         - cd /tmp &&
-          wget https://git.qos.cc/api/v1/repos/ops/nginx/archive/main.zip &&
+          wget https://git.qos.cc/api/v1/repos/public/nginx/archive/main.zip &&
           unzip main.zip && cp -rf /tmp/nginx/* /opt/conf
       volumeMounts:
         - name: conf

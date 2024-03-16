@@ -15,7 +15,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: geodata-cache
+  name: cache
   namespace: {{ .Release.Namespace }}
 spec:
   accessModes:
@@ -23,17 +23,4 @@ spec:
   storageClassName: "longhorn"
   resources:
     requests:
-      storage: 1Gi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: ml-cache
-  namespace: {{ .Release.Namespace }}
-spec:
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: "longhorn"
-  resources:
-    requests:
-      storage: 5Gi
+      storage: 4Gi

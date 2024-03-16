@@ -22,12 +22,14 @@ immich:
       REVERSE_GEOCODING_DUMP_DIRECTORY: /geodata-cache
     persistence:
       geodata-cache:
-        existingClaim: geodata-cache
+        existingClaim: cache
+        subPath: geodata
   machine-learning:
     enabled: true
     persistence:
       cache:
-        existingClaim: ml-cache
+        existingClaim: cache
+        subPath: machine-learning
     resources:
       limits:
         gpu.intel.com/i915: 1

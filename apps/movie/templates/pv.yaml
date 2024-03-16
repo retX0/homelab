@@ -12,18 +12,3 @@ spec:
     path: "/mnt/nfs/pt"
   mountOptions:
     - nfsvers=4.2
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: nfs-config
-spec:
-  capacity:
-    storage: 30Gi
-  accessModes:
-    - ReadWriteMany
-  nfs:
-    server: 172.23.29.4
-    path: "/mnt/nfs/docker"
-  mountOptions:
-    - nfsvers=4.2

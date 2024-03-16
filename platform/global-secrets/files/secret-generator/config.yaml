@@ -31,4 +31,25 @@
       length: 32
       special: false
 
-
+# Database.postgresql
+- name: postgresql.auth
+  data:
+    - key: secret
+      length: 32
+      special: false
+# Database.mysql
+- name: mysql.root
+  data:
+    - key: secret
+      length: 32
+      special: false
+- name: mysql.pwd
+  data:
+    - key: secret
+      length: 32
+      special: false
+- name: mysql.replication
+  data:
+    - key: secret
+      length: 32
+      special: false

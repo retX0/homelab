@@ -6,7 +6,6 @@ n8n:
     annotations:
       kubernetes.io/ingress.class: nginx
       cert-manager.io/cluster-issuer: letsencrypt-prod
-      hajimari.io/icon: "puzzle"
     hosts:
       - host: &host n8n.qos.cc
         paths:

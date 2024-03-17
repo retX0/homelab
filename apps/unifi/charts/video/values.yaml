@@ -44,7 +44,6 @@ ingress:
   annotations:
     kubernetes.io/ingress.class: nginx
     cert-manager.io/cluster-issuer: letsencrypt-prod
-    hajimari.io/enable: 'false'
   hosts:
     - host: &host video.unifi.qos.cc
       paths:

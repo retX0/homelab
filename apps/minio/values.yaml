@@ -8,7 +8,6 @@ minio:
     annotations:
       kubernetes.io/ingress.class: nginx
       cert-manager.io/cluster-issuer: letsencrypt-prod
-      hajimari.io/enable: 'false'
     path: /
     hosts:
       - &api-host api.minio.qos.cc
@@ -22,8 +21,6 @@ minio:
     annotations:
       kubernetes.io/ingress.class: nginx
       cert-manager.io/cluster-issuer: letsencrypt-prod
-      hajimari.io/icon: "bucket"
-      hajimari.io/appName: "MiniO"
     path: /
     hosts:
       - &host minio.qos.cc

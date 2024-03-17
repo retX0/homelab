@@ -10,7 +10,6 @@ nginx:
     ingressClassName: nginx
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt-prod
-      hajimari.io/enable: 'false'
     tls: true
     extraHosts:
       - name: &pve_host pve.qos.cc

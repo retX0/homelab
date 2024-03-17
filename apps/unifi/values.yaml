@@ -9,8 +9,6 @@ unifi:
       ingressClassName: nginx
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod
-        hajimari.io/icon: "router-network"
-        hajimari.io/appName: "unifi"
       hosts:
         - host: &host unifi.qos.cc
           paths:

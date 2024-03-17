@@ -6,7 +6,6 @@ vaultwarden:
     tlsSecret: "vaultwarden-tls-certificate"
     additionalAnnotations:
       cert-manager.io/cluster-issuer: letsencrypt-prod
-      hajimari.io/enable: 'false'
   signupsAllowed: false
   smtp:
 

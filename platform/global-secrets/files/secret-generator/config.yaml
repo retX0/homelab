@@ -49,3 +49,10 @@
     - key: replication
       length: 32
       special: false
+
+# vaultwarden
+- name: vaultwarden.admin
+  data:
+    - key: token
+      length: 32
+      special: false

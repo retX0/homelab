@@ -1,6 +1,6 @@
 all:
   vars:
-    control_plane_endpoint: 172.23.29.2
+    control_plane_endpoint: 172.23.29.73
     load_balancer_ip_pool:
       - 172.23.29.224/27
 metal:

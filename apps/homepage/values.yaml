@@ -77,14 +77,6 @@ app-template:
                 description: Document management system
                 icon: paperless.svg
           - Management:
-            - Transmission:
-                href: https://transmission.qos.cc
-                description: Bittorrent client
-                icon: transmission.svg
-            - Prowlarr:
-                href: https://prowlarr.qos.cc
-                description: Indexer manager
-                icon: prowlarr.svg
             - Radarr:
                 href: https://radarr.qos.cc
                 description: Movie manager
@@ -119,22 +111,11 @@ app-template:
                 description: Observability dashboards
                 icon: grafana.svg
           - Utilities:
-            - Excalidraw:
-                href: https://draw.qos.cc
-                description: Virtual whiteboard
-                icon: excalidraw.svg
             - Speedtest:
                 href: https://speedtest.qos.cc
                 description: Internal network speed test
                 icon: openspeedtest.png
         bookmarks.yaml: |
-          - Homelab:
-            - Documentation:
-              - href: https://homelab.qos.cc
-                icon: google-docs.svg
-            - Public homelab repository:
-              - href: https://github.com/khuedoan/homelab
-                icon: github.svg
           - Managed services:
             - Cloudflare:
               - href: https://dash.cloudflare.com
@@ -147,10 +128,10 @@ app-template:
                 icon: zerotier.svg
           - Infrastructure:
             - Router:
-              - href: https://192.168.1.1
+              - href: https://172.23.31.99
                 icon: router.svg
             - Proxmox:
-              - href: https://proxmox:8006
+              - href: https://172.23.31.252:8006
                 icon: proxmox.svg
             - Google Cloud:
               - href: https://console.cloud.google.com

@@ -70,6 +70,8 @@ overseerr:
       subPath: overseerr
       existingClaim: config
 sonarr:
+  image:
+    tag: 4.0.2
   env:
     TZ: Asia/Shanghai
   ingress:
@@ -102,6 +104,8 @@ sonarr:
       mountPath: /media
       existingClaim: nfs-downloads
 radarr:
+  image:
+    tag: 5.3.6.8612
   env:
     TZ: Asia/Shanghai
   ingress:

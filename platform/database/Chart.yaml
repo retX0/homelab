@@ -9,5 +9,5 @@ dependencies:
   version: 9.23.0
   repository: https://charts.bitnami.com/bitnami
 - name: redis
-  version: 18.19.2
+  version: 18.19.4
   repository: https://charts.bitnami.com/bitnami

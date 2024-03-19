@@ -1,4 +1,6 @@
 plex:
+  image:
+    tag: 1.40.1.8227-c0dd5a73e
   env:
     TZ: Asia/Shanghai
     PLEX_CLAIM: "claim-h2d1n44d-zWzfxAh8TUm" # https://www.plex.tv/claim 首次使用时填写这个 env 可直接通过域名来访问，否则需要端口转发。

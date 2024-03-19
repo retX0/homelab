@@ -9,7 +9,7 @@ app-template:
           env:
             PAPERLESS_PORT: 8000
             PAPERLESS_ADMIN_USER: admin
-            PAPERLESS_URL: https://paperless.khuedoan.com
+            PAPERLESS_URL: https://paperless.qos.cc
           envFrom:
             - secret: "{{ .Release.Name }}-secret"
         redis:
@@ -18,6 +18,7 @@ app-template:
             tag: 7.2.4
   service:
     main:
+      controller: main
       ports:
         http:
           port: 8000
@@ -29,12 +30,12 @@ app-template:
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod
       hosts:
-        - host: &host paperless.khuedoan.com
+        - host: &host paperless.qos.cc
           paths:
             - path: /
               pathType: Prefix
               service:
-                name: main
+                identifier: main
                 port: http
       tls:
         - hosts:

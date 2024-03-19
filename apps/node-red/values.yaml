@@ -1,0 +1,43 @@
+app-template:
+  controllers:
+    main:
+      containers:
+        main:
+          image:
+            repository: nodered/node-red
+            tag: 3.1.7-18
+  service:
+    main:
+      controller: main
+      ports:
+        http:
+          port: 1880
+          protocol: HTTP
+  ingress:
+    main:
+      enabled: true
+      className: nginx
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+      hosts:
+        - host: &host node-red.qos.cc
+          paths:
+            - path: /
+              pathType: Prefix
+              service:
+                identifier: main
+                port: http
+      tls:
+        - hosts:
+            - *host
+          secretName: node-red-tls-certificate
+  persistence:
+    config:
+      enabled: true
+      type: persistentVolumeClaim
+      accessMode: ReadWriteOnce
+      size: 1Gi
+      storageClass: longhorn
+      retain: true
+      globalMounts:
+        - path: /data

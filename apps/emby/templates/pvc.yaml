@@ -11,30 +11,3 @@ spec:
     requests:
       storage: 10Ti
   volumeName: emby-media
-# ---
-# apiVersion: v1
-# kind: PersistentVolumeClaim
-# metadata:
-#   name: aliyun-drive
-#   namespace: {{ .Release.Namespace }}
-# spec:
-#   accessModes:
-#     - ReadWriteMany
-#   storageClassName: "rclone"
-#   resources:
-#     requests:
-#       storage: 5Ti
-#   volumeName: aliyun-drive
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: config
-  namespace: {{ .Release.Namespace }}
-spec:
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: "longhorn"
-  resources:
-    requests:
-      storage: 8Gi

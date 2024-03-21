@@ -3,16 +3,7 @@ app-template:
     main:
       nameOverride: alist
       containers:
-        init-container:
-          image: 
-            repository: busybox
-            tag: "1.36.1"
-          command: ['/bin/sh', '/scripts/setup-env.sh']
-          envFrom: 
-            - secret: xiaoya-token
         xiaoya:
-          dependsOn:
-            - init-container
           image:
             repository: xiaoyaliu/alist
             tag: "latest"
@@ -21,6 +12,16 @@ app-template:
             liveness:
               spec:
                 initialDelaySeconds: 500
+      initContainers:
+        setup-env:
+          image:
+            repository: busybox
+            tag: 1.36.1
+          envFrom: 
+            - secret: xiaoya-token
+          command: 
+            - /bin/sh
+            - /scripts/setup-env.sh
     update:
       type: cronjob
       cronjob:
@@ -103,5 +104,5 @@ app-template:
       name: scripts
       advancedMounts:
         main:
-          init-container:
+          setup-env:
             - path: /scripts

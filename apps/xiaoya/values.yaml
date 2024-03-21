@@ -1,13 +1,18 @@
 app-template:
   controllers:
     main:
+      nameOverride: alist
       containers:
         init-container:
           image: 
             repository: busybox
             tag: "1.36.1"
           command: ['/bin/sh', '/scripts/setup-env.sh']
+          envFrom: 
+            - secret: xiaoya-token
         xiaoya:
+          dependsOn:
+            - init-container
           image:
             repository: xiaoyaliu/alist
             tag: "latest"

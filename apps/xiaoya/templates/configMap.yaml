@@ -9,15 +9,16 @@ data:
 
     if [ ! -f "/data/docker_address.txt" ]; then
         echo "https://xiaoya.qos.cc" > /data/docker_address.txt
-        echo "write into /data/docker_address.txt"
     fi
 
     if [ ! -f "/data/myopentoken.txt" ]; then
         echo "$OPEN_TOKEN" > /data/myopentoken.txt
-        echo "write into /data/myopentoken.txt"
     fi
 
     if [ ! -f "/data/temp_transfer_folder_id.txt" ]; then
         echo "$FOLDER_ID" > /data/temp_transfer_folder_id.txt
-        echo "write into /data/temp_transfer_folder_id.txt"
+    fi
+
+    if [ ! -f "/data/mytoken.txt" ]; then
+        echo "$TOKEN" > /data/mytoken.txt
     fi

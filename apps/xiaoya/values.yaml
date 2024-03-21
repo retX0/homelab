@@ -17,6 +17,10 @@ app-template:
             repository: xiaoyaliu/alist
             tag: "latest"
             pullPolicy: Always
+          probes:
+            liveness:
+              spec:
+                initialDelaySeconds: 500
     update:
       type: cronjob
       cronjob:

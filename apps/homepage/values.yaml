@@ -108,6 +108,10 @@ app-template:
                 href: https://speedtest.qos.cc
                 description: Internal network speed test
                 icon: openspeedtest.png
+            - Node-red:
+                href: https://node-red.qos.cc
+                description: Node for homeassist
+                icon: node-red.svg
         bookmarks.yaml: |
           - Managed services:
             - Cloudflare:
@@ -123,6 +127,9 @@ app-template:
             - Router:
               - href: https://172.23.31.99
                 icon: router.svg
+            - Unifi:
+              - href: https://172.23.31.29:8443
+                icon: unifi.svg
             - Proxmox:
               - href: https://172.23.31.252:8006
                 icon: proxmox.svg

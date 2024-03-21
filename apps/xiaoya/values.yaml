@@ -11,6 +11,36 @@ app-template:
           image:
             repository: xiaoyaliu/alist
             tag: "latest"
+            pullPolicy: Always
+    update:
+      type: cronjob
+      cronjob:
+        timeZone: Asia/Shanghai
+        schedule: 0 2 */9 * *
+      containers:
+        glue:
+          image:
+            repository: xiaoyaliu/glue
+            tag: latest
+            pullPolicy: Always
+          command: ['/update.sh']
+          env:
+            LANG: C.UTF-8
+    clean:
+      type: cronjob
+      cronjob:
+        timeZone: Asia/Shanghai
+        schedule: 0 3 * * *
+      containers:
+        glue:
+          image:
+            repository: curlimages/curl
+            tag: 8.6.0
+          command: ['/bin/sh', '-c']
+          args:
+              - sh <(curl -s https://git.qos.cc/public/aliyun_clear/raw/branch/main/clear.sh)
+          env:
+            LANG: C.UTF-8
   service:
     main:
       controller: main
@@ -43,6 +73,19 @@ app-template:
       globalMounts:
         - path: /data/
           subPath: xiaoya
+      advancedMounts:
+        update:
+          glue:
+            - path: /etc/xiaoya
+              subPath: xiaoya
+    media:
+      enabled: true
+      type: nfs
+      server: 172.23.29.4
+      path: /mnt/nfs/pt
+      globalMounts:
+        - path: /media
+          subPath: Cloud
     env-script:
       enabled: true
       type: configMap

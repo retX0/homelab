@@ -69,15 +69,17 @@ app-template:
   persistence:
     config:
       enabled: true
-      existingClaim: pvc-config
+      type: persistentVolumeClaim
+      accessMode: ReadWriteOnce
+      size: 100Mi
+      storageClass: longhorn
+      retain: true
       globalMounts:
         - path: /data/
-          subPath: xiaoya
       advancedMounts:
         update:
           glue:
             - path: /etc/xiaoya
-              subPath: xiaoya
     media:
       enabled: true
       type: nfs

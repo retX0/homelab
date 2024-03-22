@@ -130,6 +130,9 @@ app-template:
             - Unifi:
               - href: https://172.23.31.29:8443
                 icon: unifi.svg
+            - Home Assistant:
+              - href: http://172.23.31.7:8123
+                icon: home-assistant.svg
             - Proxmox:
               - href: https://172.23.31.252:8006
                 icon: proxmox.svg

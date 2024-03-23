@@ -1,6 +1,8 @@
 # kubectl apply -f https://raw.githubusercontent.com/therevoman/edgetpu-device-plugin/master/edgetpu-device-plugin.amd64.yaml
 # install intel-gpu-tools first
 frigate:
+  image:
+    tag: 0.13.2
   env:
     TZ: Asia/Shanghai
   envFromSecrets:

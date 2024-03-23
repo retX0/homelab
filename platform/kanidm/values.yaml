@@ -31,10 +31,6 @@ app-template:
     main:
       controller: main
       ports:
-        http:
-          enabled: false
-          # remove this line when bug was fixed
-          port: 80
         https:
           port: 443
           protocol: HTTPS

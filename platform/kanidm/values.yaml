@@ -29,9 +29,12 @@ app-template:
           origin = "https://auth.qos.cc"
   service:
     main:
+      controller: main
       ports:
         http:
           enabled: false
+          # remove this line when bug was fixed
+          port: 80
         https:
           port: 443
           protocol: HTTPS
@@ -51,7 +54,7 @@ app-template:
             - path: /
               pathType: Prefix
               service:
-                name: main
+                identifier: main
                 port: https
       tls:
         - hosts:

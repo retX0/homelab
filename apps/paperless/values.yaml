@@ -12,6 +12,7 @@ app-template:
             PAPERLESS_URL: https://paperless.qos.cc
             PAPERLESS_REDIS: redis://database-redis-headless.database:6379
             PAPERLESS_DBHOST: database-postgresql.database
+            PAPERLESS_APPS: allauth.socialaccount.providers.openid_connect
           envFrom:
             - secret: "{{ .Release.Name }}-secret"
         redis:

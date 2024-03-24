@@ -10,6 +10,8 @@ app-template:
             PAPERLESS_PORT: 8000
             PAPERLESS_ADMIN_USER: admin
             PAPERLESS_URL: https://paperless.qos.cc
+            PAPERLESS_REDIS: redis://database-redis-headless.database:6379
+            PAPERLESS_DBHOST: database-postgresql.database
           envFrom:
             - secret: "{{ .Release.Name }}-secret"
         redis:

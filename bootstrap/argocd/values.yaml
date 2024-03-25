@@ -1,4 +1,6 @@
 argo-cd:
+  global:
+    domain: &domain argocd.qos.cc
   configs:
     cm:
       oidc.config: |
@@ -52,11 +54,11 @@ argo-cd:
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod
       hosts:
-        - &host argocd.qos.cc
+        - *domain
       tls:
         - secretName: argocd-tls-certificate
           hosts:
-            - *host
+            - *domain
     metrics: &metrics
       enabled: true
       serviceMonitor:

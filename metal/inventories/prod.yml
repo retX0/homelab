@@ -8,6 +8,6 @@ metal:
     masters:
       hosts:
         pn41: {ansible_host: 172.23.29.2, mac: '7c:10:c9:b7:f0:08', disk: nvme0n1, network_interface: enp2s0}
-    # workers:
-      # hosts:
-        # lab: {ansible_host: 172.23.29.3, mac: 'd2:c9:d6:c9:41:01', disk: sda, network_interface: ens18}
+      workers:
+        hosts:
+          lab: {ansible_host: 172.23.29.3, mac: 'd2:c9:d6:c9:41:01', disk: sda, network_interface: ens18}

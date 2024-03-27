@@ -132,11 +132,6 @@ They can't capture all the project's features, but they are sufficient to get a 
         <td>Ephemeral PXE server and convenient tools container</td>
     </tr>
     <tr>
-        <td><img width="32" src="https://github.com/distribution/distribution/raw/main/distribution-logo.svg"></td>
-        <td><a href="https://github.com/distribution/distribution">Docker Registry</a></td>
-        <td>Private container registry</td>
-    </tr>
-    <tr>
         <td><img width="32" src="https://github.com/kubernetes-sigs/external-dns/raw/master/docs/img/external-dns.png"></td>
         <td><a href="https://github.com/kubernetes-sigs/external-dns">ExternalDNS</a></td>
         <td>Synchronizes exposed Kubernetes Services and Ingresses with DNS providers</td>
@@ -182,11 +177,6 @@ They can't capture all the project's features, but they are sufficient to get a 
         <td>Log aggregation system</td>
     </tr>
     <tr>
-        <td><img width="32" src="https://longhorn.io/img/logos/longhorn-icon-white.png"></td>
-        <td><a href="https://longhorn.io">Longhorn</a></td>
-        <td>Cloud native distributed block storage for Kubernetes</td>
-    </tr>
-    <tr>
         <td><img width="32" src="https://avatars.githubusercontent.com/u/1412239?s=200&v=4"></td>
         <td><a href="https://www.nginx.com">NGINX</a></td>
         <td>Kubernetes Ingress Controller</td>
@@ -207,6 +197,11 @@ They can't capture all the project's features, but they are sufficient to get a 
         <td>Automatically update dependencies</td>
     </tr>
     <tr>
+        <td><img width="32" src="https://raw.githubusercontent.com/rook/artwork/master/logo/blue.svg"></td>
+        <td><a href="https://rook.io">Rook Ceph</a></td>
+        <td>Cloud-Native Storage for Kubernetes</td>
+    </tr>
+    <tr>
         <td><img width="32" src="https://avatars.githubusercontent.com/u/84780935?s=200&v=4"></td>
         <td><a href="https://woodpecker-ci.org">Woodpecker CI</a></td>
         <td>Simple yet powerful CI/CD engine with great extensibility</td>
@@ -215,6 +210,11 @@ They can't capture all the project's features, but they are sufficient to get a 
         <td><img width="32" src="https://docs.zerotier.com/img/ZeroTierIcon.png"></td>
         <td><a href="https://zerotier.com">ZeroTier</a></td>
         <td>VPN without port forwarding</td>
+    </tr>
+    <tr>
+        <td><img width="32" src="https://zotregistry.dev/v2.0.2/assets/images/logo.svg"></td>
+        <td><a href="https://zotregistry.dev">Zot Registry</a></td>
+        <td>Private container registry</td>
     </tr>
 </table>
 
@@ -235,7 +235,7 @@ Please see [contributing guide](https://homelab.khuedoan.com/reference/contribut
 
 ## License
 
-Copyright &copy; 2020 - 2022 Khue Doan
+Copyright &copy; 2020 - 2024 Khue Doan
 
 Distributed under the GPLv3 License.
 See [license page](https://homelab.khuedoan.com/reference/license) or `LICENSE.md` file for more information.

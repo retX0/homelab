@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://squidfunk.github.io/mkdocs-material/schema.json
 
 site_name: Khue's Homelab
-copyright: Copyright &copy; 2020 - 2022 Khue Doan
+copyright: Copyright &copy; 2020 - 2024 Khue Doan
 
 repo_url: https://github.com/khuedoan/homelab
 
@@ -74,7 +74,6 @@ nav:
       - how-to-guides/troubleshooting/argocd.md
       - how-to-guides/troubleshooting/cert-manager.md
       - how-to-guides/troubleshooting/gitea.md
-      - how-to-guides/troubleshooting/longhorn.md
       - how-to-guides/troubleshooting/pxe-boot.md
   - Reference:
     - reference/index.md

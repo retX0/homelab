@@ -8,23 +8,16 @@ spec:
   schedule: 0 3 * * *
   template:
     includedNamespaces:
-    - 'bark'
-    - 'emby'
     - 'gitea'
     - 'immich'
-    - 'jackett'
-    - 'longhorn-system'
     - 'minio'
     - 'movie'
-    - 'plex'
-    - 'postgresql'
+    - 'database'
     - 'rss'
-    - 'subfinder'
     - 'uptime-kuma'
-    - 'vault'
     - 'vaultwarden'
     excludedNamespaces:
-    - some-namespace
+    - 'nginx'
     includedResources:
     - '*'
     includeClusterResources: true

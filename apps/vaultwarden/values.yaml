@@ -28,4 +28,4 @@ vaultwarden:
   storage:
     enabled: true
     size: "3Gi"
-    class: "longhorn"
+    class: "standard-rwo"

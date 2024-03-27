@@ -44,8 +44,6 @@ gitea:
         ALLOWED_HOST_LIST: private
       migrations:
         ALLOWED_DOMAINS: gitea.xnxin.com, github.com, *.github.com
-  persistence:
-    storageClass: longhorn
   redis-cluster:
     enabled: false
   postgresql-ha:

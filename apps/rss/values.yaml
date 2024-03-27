@@ -24,4 +24,4 @@ freshrss:
   persistence:
     config:
       enabled: true
-      storageClass: longhorn
+      storageClass: standard-rwo

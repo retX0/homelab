@@ -7,7 +7,7 @@ rook-ceph-cluster:
     createPrometheusRules: true
   cephClusterSpec:
     mon:
-      count: 3
+      count: 2
     mgr:
       count: 2
     dashboard:

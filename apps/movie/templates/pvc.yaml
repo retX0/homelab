@@ -18,8 +18,8 @@ metadata:
   namespace: {{ .Release.Namespace }}
 spec:
   accessModes:
-    - ReadWriteMany
-  storageClassName: "longhorn"
+    - ReadWriteOnce
+  storageClassName: "standard-rwo"
   resources:
     requests:
       storage: 20Gi

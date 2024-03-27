@@ -27,6 +27,8 @@ argo-cd:
         p, role:org-admin, repositories, update, *, allow
         p, role:org-admin, repositories, delete, *, allow
         g, editor@auth.qos.cc, role:org-admin
+    params:
+      controller.diff.server.side: "true"
   server:
     extraArgs:
       - --insecure

@@ -41,15 +41,14 @@ app-template:
   persistence:
     config:
       enabled: true
-      type: persistentVolumeClaim
       accessMode: ReadWriteOnce
       size: 8Gi
-      storageClass: longhorn
-      retain: true
       globalMounts:
         - path: /config
     media:
       enabled: true
-      existingClaim: media
+      type: nfs
+      server: 172.23.29.4
+      path: /mnt/nfs/pt
       globalMounts:
         - path: /media

@@ -29,4 +29,3 @@ n8n:
     enabled: true
     accessMode: ReadWriteOnce
     size: 2G
-    storageClass: longhorn

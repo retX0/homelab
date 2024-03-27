@@ -5,13 +5,25 @@ rook-ceph-cluster:
   monitoring:
     enabled: true
     createPrometheusRules: true
+  ingress:
+    dashboard:
+      ingressClassName: nginx
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+        external-dns.alpha.kubernetes.io/hostname:  &host ceph-dashboard.qos.cc
+        nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+      host:
+        name: *host
+        path: /
+      tls:
+      - hosts:
+          - *host
+        secretName: ceph-dashboard-tls
   cephClusterSpec:
     mon:
       count: 2
     mgr:
       count: 2
-    dashboard:
-      ssl: false
     logCollector:
       enabled: false
     removeOSDsIfOutAndSafeToRemove: true

@@ -11,16 +11,3 @@ spec:
     requests:
       storage: 10Ti
   volumeName: plex-media
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: config
-  namespace: {{ .Release.Namespace }}
-spec:
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: "longhorn"
-  resources:
-    requests:
-      storage: 10Gi

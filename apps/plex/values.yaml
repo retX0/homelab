@@ -26,8 +26,7 @@ plex:
   persistence:
     config:
       enabled: true
-      mountPath: /config
-      existingClaim: config
+      size:  10Gi
     media:
       enabled: true
       mountPath: /media

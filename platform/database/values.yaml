@@ -3,7 +3,6 @@ postgresql:
     registry: ghcr.io
     repository: retx0/bitnami-postgresql
   global:
-    storageClass: "longhorn"
     postgresql:
       auth:
         existingSecret: postgresql-auth

@@ -46,11 +46,8 @@ app-template:
   persistence:
     config:
       enabled: true
-      type: persistentVolumeClaim
       accessMode: ReadWriteOnce
       size: 3Gi
-      storageClass: longhorn
-      retain: true
       globalMounts:
         - path: /config
     media:

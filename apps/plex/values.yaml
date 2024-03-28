@@ -31,7 +31,7 @@ plex:
       enabled: true
       mountPath: /media
       existingClaim: media
-  resources:
-    limits:
-      gpu.intel.com/i915: 1
+  # resources:
+  #   limits:
+  #     gpu.intel.com/i915: 1
 

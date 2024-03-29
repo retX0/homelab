@@ -1,9 +1,4 @@
 app-template:
-  defaultPodOptions:
-    securityContext:
-      fsGroup: 568
-      runAsUser: 2199
-      runAsGroup: 568
   controllers:
     jellyseerr:
       containers:

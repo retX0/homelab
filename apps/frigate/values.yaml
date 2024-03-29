@@ -72,10 +72,17 @@ frigate:
     privileged: true
     capabilities:
         add: ["CAP_PERFMON"]
-  resources:
-    limits:
-      kkohtaka.org/edgetpu: 1
-      gpu.intel.com/i915: 1
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: feature.node.kubernetes.io/usb-fe_1a6e_089a.present
+            operator: In
+            values: [ "true" ]
+          - key: feature.node.kubernetes.io/cpu-model.vendor_id
+            operator: In
+            values: [ "Intel" ]
 
 double-take:
   image:

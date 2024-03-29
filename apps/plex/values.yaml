@@ -22,6 +22,8 @@ app-template:
             PGID: 568
             TZ: Asia/Shanghai
             PLEX_CLAIM: "" # https://www.plex.tv/claim 首次使用时填写这个 env 可直接通过域名来访问，否则需要端口转发。
+          securityContext:
+            privileged: true
   service:
     main:
       controller: main

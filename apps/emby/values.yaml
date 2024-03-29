@@ -2,6 +2,14 @@ app-template:
   defaultPodOptions:
     securityContext:
       fsGroup: 568
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: feature.node.kubernetes.io/pci-0300_8086.present
+              operator: In
+              values: [ "true" ]
   controllers:
     main:
       containers:
@@ -13,6 +21,8 @@ app-template:
             PUID: 2199
             PGID: 568
             TZ: Asia/Shanghai
+          securityContext:
+            privileged: true
   service:
     main:
       controller: main

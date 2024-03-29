@@ -23,6 +23,8 @@ app-template:
             TZ: Asia/Shanghai
             UMASK: 022
             PERMS: false
+          securityContext:
+            privileged: true
   service:
     main:
       controller: main
@@ -55,6 +57,11 @@ app-template:
       size: 3Gi
       globalMounts:
         - path: /config
+    graphic:
+      type: hostPath
+      hostPath: "/dev/dri"
+      globalMounts:
+        - path: "/dev/dri"
     media:
       enabled: true
       type: nfs

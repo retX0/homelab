@@ -1,13 +1,38 @@
-plex:
-  image:
-    tag: 1.40.1.8227-c0dd5a73e
-  env:
-    TZ: Asia/Shanghai
-    PLEX_CLAIM: "claim-h2d1n44d-zWzfxAh8TUm" # https://www.plex.tv/claim 首次使用时填写这个 env 可直接通过域名来访问，否则需要端口转发。
+app-template:
+  defaultPodOptions:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: feature.node.kubernetes.io/pci-0300_8086.present
+              operator: In
+              values: [ "true" ]
+    securityContext:
+      fsGroup: 568
+  controllers:
+    main:
+      containers:
+        main:
+          image:
+            repository: plexinc/pms-docker
+            tag: 1.40.1.8227-c0dd5a73e
+          env:
+            PUID: 2199
+            PGID: 568
+            TZ: Asia/Shanghai
+            PLEX_CLAIM: "" # https://www.plex.tv/claim 首次使用时填写这个 env 可直接通过域名来访问，否则需要端口转发。
+  service:
+    main:
+      controller: main
+      ports:
+        http:
+          port: 32400
+          protocol: HTTP
   ingress:
     main:
       enabled: true
-      ingressClassName: nginx
+      className: nginx
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod
       hosts:
@@ -15,28 +40,24 @@ plex:
           paths:
             - path: /
               pathType: Prefix
+              service:
+                identifier: main
+                port: http
       tls:
-        - secretName: plex-tls-certificate
-          hosts:
+        - hosts:
             - *host
-  podSecurityContext:
-    runAsUser: 568
-    runAsGroup: 568
-    fsGroup: 568
+          secretName: plex-tls-certificate
   persistence:
     config:
       enabled: true
-      size:  10Gi
+      accessMode: ReadWriteOnce
+      size: 10Gi
+      globalMounts:
+        - path: /config
     media:
       enabled: true
-      mountPath: /media
-      existingClaim: media
-  affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-        - matchExpressions:
-          - key: feature.node.kubernetes.io/pci-0300_8086.present
-            operator: In
-            values: [ "true" ]
-
+      type: nfs
+      server: 172.23.29.4
+      path: /mnt/nfs/pt
+      globalMounts:
+        - path: /media

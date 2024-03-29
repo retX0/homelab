@@ -61,10 +61,17 @@ app-template:
               target: _blank
         services.yaml: |
           - Popular:
-            - Overseerr:
-                href: https://overseerr.qos.cc/
+            - Jellyseerr:
+                href: https://jellyseerr.qos.cc/
                 description: Moive and TV management
-                icon: overseerr.svg
+                icon: jellyseerr.svg
+            - Github:
+                href: https://www.github.com
+                icon: github.svg
+            - Gitea:
+                href: https://git.qos.cc
+                description: Git forge
+                icon: gitea.svg
           - Management:
             - Radarr:
                 href: https://radarr.qos.cc
@@ -83,10 +90,6 @@ app-template:
                 description: Identity management
                 icon: https://auth.qos.cc/pkg/img/logo-square.svg
           - Development:
-            - Gitea:
-                href: https://git.qos.cc
-                description: Git forge
-                icon: gitea.svg
             - Woodpecker:
                 href: https://ci.qos.cc
                 description: Continuous integration
@@ -123,6 +126,13 @@ app-template:
             - Zerotier:
               - href: https://my.zerotier.com
                 icon: zerotier.svg
+          - AI services:
+            - ChatGPT:
+              - href: https://chat.openai.com
+            - Claude:
+              - href: https://claude.ai
+            - Perplexity:
+              - href: https://www.perplexity.ai
           - Infrastructure:
             - Router:
               - href: https://172.23.31.99
@@ -136,9 +146,9 @@ app-template:
             - Proxmox:
               - href: https://172.23.31.252:8006
                 icon: proxmox.svg
-            - Google Cloud:
-              - href: https://console.cloud.google.com
-                icon: google-cloud-platform.svg
+            - Cloudflare:
+              - href: https://www.cloudflare.com
+                icon: cloudflare.svg
             - Oracle Cloud:
               - href: https://cloud.oracle.com
                 icon: oracle-cloud.svg

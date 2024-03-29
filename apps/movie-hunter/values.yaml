@@ -1,0 +1,131 @@
+app-template:
+  defaultPodOptions:
+    securityContext:
+      fsGroup: 568
+      runAsUser: 2199
+      runAsGroup: 568
+  controllers:
+    jellyseerr:
+      containers:
+        main:
+          image:
+            repository: fallenbagel/jellyseerr
+            tag: 1.7.0
+          env:
+            PUID: 2199
+            PGID: 568
+            TZ: Asia/Shanghai
+    radarr:
+      containers:
+        main:
+          image:
+            repository: linuxserver/radarr
+            tag: 5.3.6
+          env:
+            PUID: 2199
+            PGID: 568
+            TZ: Asia/Shanghai
+    sonarr:
+      containers:
+        main:
+          image:
+            repository: linuxserver/sonarr
+            tag: 4.0.2
+          env:
+            TZ: Asia/Shanghai
+  service:
+    jellyseerr:
+      controller: jellyseerr
+      ports:
+        http:
+          port: 5055
+          protocol: HTTP
+    radarr:
+      controller: radarr
+      ports:
+        http:
+          port: 7878
+          protocol: HTTP
+    sonarr:
+      controller: sonarr
+      ports:
+        http:
+          port: 8989
+          protocol: HTTP
+  ingress:
+    jellyseerr:
+      enabled: true
+      className: nginx
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+      hosts:
+        - host: &host jellyseerr.qos.cc
+          paths:
+            - path: /
+              pathType: Prefix
+              service:
+                identifier: jellyseerr
+                port: http
+      tls:
+        - hosts:
+            - *host
+          secretName: jellyseerr-tls-certificate
+    radarr:
+      enabled: true
+      className: nginx
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+      hosts:
+        - host: &host radarr.qos.cc
+          paths:
+            - path: /
+              pathType: Prefix
+              service:
+                identifier: radarr
+                port: http
+      tls:
+        - hosts:
+            - *host
+          secretName: radarr-tls-certificate
+    sonarr:
+      enabled: true
+      className: nginx
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+      hosts:
+        - host: &host sonarr.qos.cc
+          paths:
+            - path: /
+              pathType: Prefix
+              service:
+                identifier: sonarr
+                port: http
+      tls:
+        - hosts:
+            - *host
+          secretName: sonarr-tls-certificate
+  persistence:
+    config:
+      enabled: true
+      accessMode: ReadWriteOnce
+      size: 15Gi
+      advancedMounts:
+        jellyseerr:
+          main:
+            - path: /app/config
+              subPath: jellyseerr
+        radarr:
+          main:
+            - path: /config
+              subPath: radarr
+        sonarr:
+          main:
+            - path: /config
+              subPath: sonarr
+    media:
+      enabled: true
+      type: nfs
+      server: 172.23.29.4
+      path: /mnt/nfs/pt
+      globalMounts:
+        - path: /media

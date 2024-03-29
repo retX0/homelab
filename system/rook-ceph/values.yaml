@@ -1,4 +1,7 @@
 rook-ceph:
+  csi:
+    nfs:
+      enabled: true
   monitoring:
     enabled: true
 rook-ceph-cluster:

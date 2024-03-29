@@ -1,5 +1,13 @@
 app-template:
   defaultPodOptions:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: feature.node.kubernetes.io/pci-0300_8086.present
+              operator: In
+              values: [ "true" ]
     securityContext:
       fsGroup: 568
   controllers:
@@ -15,9 +23,6 @@ app-template:
             TZ: Asia/Shanghai
             UMASK: 022
             PERMS: false
-          resources:
-            limits:
-              gpu.intel.com/i915: 1
   service:
     main:
       controller: main

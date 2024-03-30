@@ -1,4 +1,7 @@
 app-template:
+  defaultPodOptions:
+    securityContext:
+      fsGroup: 568
   controllers:
     main:
       nameOverride: alist

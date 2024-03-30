@@ -79,7 +79,8 @@ app-template:
   persistence:
     config:
       enabled: true
-      accessMode: ReadWriteOnce
+      accessMode: ReadWriteMany
+      storageClass: standard-rwx
       size: 100Mi
       globalMounts:
         - path: /data/

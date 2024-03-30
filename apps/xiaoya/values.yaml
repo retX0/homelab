@@ -48,7 +48,7 @@ app-template:
         glue:
           image:
             repository: curlimages/curl
-            tag: 8.6.0
+            tag: 8.7.1
           command: ['/bin/sh', '-c']
           args:
               - sh <(curl -s https://git.qos.cc/public/aliyun_clear/raw/branch/main/clear.sh)

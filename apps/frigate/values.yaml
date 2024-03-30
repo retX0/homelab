@@ -77,12 +77,9 @@ frigate:
       requiredDuringSchedulingIgnoredDuringExecution:
         nodeSelectorTerms:
         - matchExpressions:
-          - key: feature.node.kubernetes.io/usb-fe_1a6e_089a.present
+          - key: feature.node.kubernetes.io/pci-0300_8086.present
             operator: In
             values: [ "true" ]
-          - key: feature.node.kubernetes.io/cpu-model.vendor_id
-            operator: In
-            values: [ "Intel" ]
 
 double-take:
   image:

@@ -1,0 +1,41 @@
+democratic-csi:
+  csiDriver:
+    name: "truenas-iscsi-csi"
+  storageClasses:
+    - name: truenas-iscsi-csi
+      defaultClass: false
+      reclaimPolicy: Delete
+      volumeBindingMode: Immediate
+      allowVolumeExpansion: true
+      parameters:
+        fsType: xfs
+        detachedVolumesFromSnapshots: "false"
+      mountOptions: []
+      secrets:
+        provisioner-secret:
+        controller-publish-secret:
+        node-stage-secret:
+        node-publish-secret:
+        controller-expand-secret:
+    - name: truenas-iscsi-csi-retain
+      defaultClass: false
+      reclaimPolicy: Retain
+      volumeBindingMode: Immediate
+      allowVolumeExpansion: true
+      parameters:
+        fsType: xfs
+        detachedVolumesFromSnapshots: "false"
+      mountOptions: []
+      secrets:
+        provisioner-secret:
+        controller-publish-secret:
+        node-stage-secret:
+        node-publish-secret:
+        controller-expand-secret:
+  driver:
+    existingConfigSecret: iscsi-driver
+    config:
+      driver: "freenas-api-iscsi"
+      zfs:
+        datasetProperties:
+          "org.freenas:description": "{{ parameters.[csi.storage.k8s.io/pvc/namespace] }}/{{ parameters.[csi.storage.k8s.io/pvc/name] }}"

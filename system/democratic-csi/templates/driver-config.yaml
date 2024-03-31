@@ -1,0 +1,47 @@
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: template
+  namespace: {{ .Release.Namespace }}
+spec:
+  refreshInterval: 1h
+  secretStoreRef:
+    name: global-secrets
+    kind: ClusterSecretStore
+  target:
+    name: iscsi-driver
+    template:
+      data:
+        driver-config-file.yaml: |
+            driver: freenas-api-iscsi
+            httpConnection:
+              protocol: http
+              host: "{{ `{{ .HOST }}` }}" 
+              port: 80
+              apiKey: "{{ `{{ .API_KEY }}` }}" 
+            iscsi:
+              extentInsecureTpc: true
+              extentXenCompat: false
+              namePrefix: csi-
+              targetPortal: "{{ `{{ .HOST }}` }}:3260"
+              targetGroups:
+                - targetGroupAuthGroup: null
+                  targetGroupAuthType: None
+                  targetGroupInitiatorGroup: 4
+                  targetGroupPortalGroup: 2
+            zfs:
+              datasetParentName: nfs/k8s/iscsi/volume
+              detachedSnapshotsDatasetParentName: nfs/k8s/iscsi/snapshots
+              zvolEnableReservation: false
+              datasetProperties:
+                "org.freenas:description": {{ print "{{ `\"{{ parameters.[csi.storage.k8s.io/pvc/namespace] }}/{{ parameters.[csi.storage.k8s.io/pvc/name] }}\"` }}" }}
+  data:
+  - secretKey: API_KEY
+    remoteRef:
+      key: truenas.k8s
+      property: api_key
+  - secretKey: HOST
+    remoteRef:
+      key: truenas.k8s
+      property: host 
+

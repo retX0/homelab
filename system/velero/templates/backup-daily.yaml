@@ -19,6 +19,7 @@ spec:
     volumeSnapshotLocations:
       - default
     ttl: 1024h0m0s
+    defaultVolumesToFsBackup: true
 status:
   phase: "FailedValidation"
   lastBackup:

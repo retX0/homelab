@@ -61,10 +61,10 @@ app-template:
               target: _blank
         services.yaml: |
           - Popular:
-            - Jellyseerr:
-                href: https://jellyseerr.qos.cc/
+            - Overseerr:
+                href: https://overseerr.qos.cc/
                 description: Moive and TV management
-                icon: jellyseerr.svg
+                icon: overseerr.svg
             - Github:
                 href: https://www.github.com
                 icon: github.svg

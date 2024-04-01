@@ -1,14 +1,15 @@
 app-template:
+  defaultPodOptions:
+    securityContext:
+      fsGroup: 568
   controllers:
-    jellyseerr:
+    overseerr:
       containers:
         main:
           image:
-            repository: fallenbagel/jellyseerr
-            tag: 1.7.0
+            repository: linuxserver/overseerr
+            tag: 1.33.2
           env:
-            PUID: 2199
-            PGID: 568
             TZ: Asia/Shanghai
     radarr:
       containers:
@@ -27,10 +28,12 @@ app-template:
             repository: linuxserver/sonarr
             tag: 4.0.2
           env:
+            PUID: 2199
+            PGID: 568
             TZ: Asia/Shanghai
   service:
-    jellyseerr:
-      controller: jellyseerr
+    overseerr:
+      controller: overseerr
       ports:
         http:
           port: 5055
@@ -48,23 +51,23 @@ app-template:
           port: 8989
           protocol: HTTP
   ingress:
-    jellyseerr:
+    overseerr:
       enabled: true
       className: nginx
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod
       hosts:
-        - host: &host jellyseerr.qos.cc
+        - host: &host overseerr.qos.cc
           paths:
             - path: /
               pathType: Prefix
               service:
-                identifier: jellyseerr
+                identifier: overseerr
                 port: http
       tls:
         - hosts:
             - *host
-          secretName: jellyseerr-tls-certificate
+          secretName: overseerr-tls-certificate
     radarr:
       enabled: true
       className: nginx
@@ -103,12 +106,13 @@ app-template:
     config:
       enabled: true
       accessMode: ReadWriteOnce
-      size: 15Gi
+      storageClass: "truenas-iscsi-csi-retain"
+      size: 50Gi
       advancedMounts:
-        jellyseerr:
+        overseerr:
           main:
-            - path: /app/config
-              subPath: jellyseerr
+            - path: /config
+              subPath: overseerr
         radarr:
           main:
             - path: /config

@@ -53,4 +53,4 @@ spec:
                 - 'kubectl'
                 - 'rollout'
                 - 'restart'
-                - 'deployment/xiaoya'
+                - 'deployment/xiaoya-alist'

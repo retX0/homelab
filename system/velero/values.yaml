@@ -15,12 +15,13 @@ velero:
       volumeMounts:
         - mountPath: /target
           name: plugins
+  nodeAgent:
+    resources:
+      requests:
+        cpu: 200m
+        memory: 512Mi
   credentials:
-    secretContents:
-      cloud: |
-        [default]
-        aws_access_key_id=admin
-        aws_secret_access_key=kuj2SUDLgHDNBQEzMS85ySfR7KBi5FRE
+    existingSecret: credentials
   configuration:
     backupStorageLocation:
     - name: default
@@ -31,7 +32,7 @@ velero:
       config:
         region: minio
         s3ForcePathStyle: true
-        s3Url: &api_host "https://api.minio.qos.cc"
+        s3Url: "http://172.23.29.4:9000" # use external minio
     volumeSnapshotLocation:
     - name: default
       provider: aws

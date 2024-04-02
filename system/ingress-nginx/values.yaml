@@ -11,3 +11,4 @@ ingress-nginx:
         enabled: true
   tcp:
     22: gitea/gitea-ssh:22
+    636: kanidm/kanidm:636

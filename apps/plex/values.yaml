@@ -31,6 +31,12 @@ app-template:
         http:
           port: 32400
           protocol: HTTP
+    webtools: # see https://github.com/ukdtom/WebTools.bundle/tree/3.0.0
+      controller: main
+      ports:
+        http:
+          port: 33400
+          protocol: HTTP
   ingress:
     main:
       enabled: true
@@ -45,9 +51,17 @@ app-template:
               service:
                 identifier: main
                 port: http
+        - host: &tools_host plugins-installer.plex.qos.cc
+          paths:
+            - path: /
+              pathType: Prefix
+              service:
+                identifier: webtools
+                port: http
       tls:
         - hosts:
             - *host
+            - *tools_host
           secretName: plex-tls-certificate
   persistence:
     config:

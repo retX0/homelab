@@ -2,6 +2,8 @@
 #   --namespace velero \
 #   --from-file cloud=credentials-velero
 velero:
+  image:
+    tag: v1.13.1
   metrics:
     serviceMonitor:
       enabled: true

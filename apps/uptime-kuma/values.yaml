@@ -93,7 +93,7 @@ persistence:
   enabled: true
   claimNameOverwrite: "uptime-pvc"
   sizeLimit: 4Gi
-  storageClass: "standard-rwo"
+  storageClass: "truenas-iscsi-csi"
   annotations: {}
   labels: {}
 

@@ -116,23 +116,6 @@ app-template:
                 description: Node for homeassist
                 icon: node-red.svg
         bookmarks.yaml: |
-          - Managed services:
-            - Cloudflare:
-              - href: https://dash.cloudflare.com
-                icon: cloudflare.svg
-            - Terraform Cloud:
-              - href: https://app.terraform.io
-                icon: terraform.svg
-            - Zerotier:
-              - href: https://my.zerotier.com
-                icon: zerotier.svg
-          - AI services:
-            - ChatGPT:
-              - href: https://chat.openai.com
-            - Claude:
-              - href: https://claude.ai
-            - Perplexity:
-              - href: https://www.perplexity.ai
           - Infrastructure:
             - Router:
               - href: https://172.23.31.99
@@ -144,11 +127,25 @@ app-template:
               - href: http://172.23.31.7:8123
                 icon: home-assistant.svg
             - Proxmox:
-              - href: https://172.23.31.252:8006
+              - href: https://pve.qos.cc
                 icon: proxmox.svg
+            - TrueNAS:
+              - href: https://nas.qos.cc
+                icon: truenas.svg
+          - AI services:
+            - ChatGPT:
+              - href: https://chat.openai.com
+            - Claude:
+              - href: https://claude.ai
+            - Perplexity:
+              - href: https://www.perplexity.ai
+          - Managed services:
             - Cloudflare:
-              - href: https://www.cloudflare.com
+              - href: https://dash.cloudflare.com
                 icon: cloudflare.svg
-            - Oracle Cloud:
-              - href: https://cloud.oracle.com
-                icon: oracle-cloud.svg
+            - Terraform Cloud:
+              - href: https://app.terraform.io
+                icon: terraform.svg
+            - Zerotier:
+              - href: https://my.zerotier.com
+                icon: zerotier.svg

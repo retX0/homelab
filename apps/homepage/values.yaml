@@ -118,13 +118,13 @@ app-template:
         bookmarks.yaml: |
           - Infrastructure:
             - Router:
-              - href: https://172.23.31.99
+              - href: http://172.23.31.99
                 icon: router.svg
             - Unifi:
-              - href: https://172.23.31.29:8443
+              - href: https://unifi.qos.cc
                 icon: unifi.svg
             - Home Assistant:
-              - href: http://172.23.31.7:8123
+              - href: https://ha.qos.cc
                 icon: home-assistant.svg
             - Proxmox:
               - href: https://pve.qos.cc

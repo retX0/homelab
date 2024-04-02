@@ -12,15 +12,14 @@ nginx:
       cert-manager.io/cluster-issuer: letsencrypt-prod
     tls: true
     extraHosts:
-      - name: &pve_host pve.qos.cc
-        path: /
-      - name: &emby_host emby.qos.cc
-        path: /
+      - name: ha.qos.cc
+      - name: unifi.qos.cc
+      - name: pve.qos.cc
+      - name: emby.qos.cc
     extraTls:
       - secretName: nginx-tls
         hosts: 
-          - *pve_host
-          - *emby_host
+          - "*.qos.cc"
   extraVolumeMounts:
     - name: conf
       mountPath: /opt/bitnami/nginx/conf/server_blocks/

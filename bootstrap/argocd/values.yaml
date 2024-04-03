@@ -8,6 +8,13 @@ argo-cd:
       controller.diff.server.side: true
     cm:
       resource.ignoreResourceUpdatesEnabled: true
+      resource.exclusions: |
+        - apiGroups:
+          - "velero.io"
+          kinds:
+          - Backup
+          clusters:
+          - "*"
       resource.customizations.ignoreResourceUpdates.all: |
         jsonPointers:
           - /status

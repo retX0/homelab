@@ -7,6 +7,9 @@ metadata:
 spec:
   schedule: 0 3 * * *
   template:
+    resourcePolicy:
+      kind: configmap
+      name: skip-nfs-and-empy-volume
     includedNamespaces:
     - '*'
     excludedNamespaces:

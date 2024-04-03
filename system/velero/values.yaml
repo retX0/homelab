@@ -28,6 +28,8 @@ velero:
   credentials:
     existingSecret: credentials
   configuration:
+    extraEnvVars:
+      TZ: Asia/Shanghai
     backupStorageLocation:
     - name: default
       provider: aws

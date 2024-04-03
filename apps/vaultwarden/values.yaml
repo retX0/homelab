@@ -1,23 +1,15 @@
 vaultwarden:
+  image:
+    tag: "1.30.3-alpine"
   ingress:
     enabled: true
-    class: "nginx"
-    hostname: &host "pwd.qos.cc" 
+    hostname: "pwd.qos.cc" 
     tlsSecret: "vaultwarden-tls-certificate"
     additionalAnnotations:
       cert-manager.io/cluster-issuer: letsencrypt-prod
-  signupsAllowed: false
-  smtp:
-
-    enabled: false
-    host: mx01.qos.cc
-    from: no-reply@qos.cc
-    fromName: "Vault Administrator"
-    username:
-      value: admin
-    password: 
-      value: password #just make it running.
+  # TODO: reference hostname
   domain: https://pwd.qos.cc
+  signupsAllowed: false
   adminToken:
     existingSecret: "secret"
     existingSecretKey: "admin_token"
@@ -25,6 +17,14 @@ vaultwarden:
     type: "postgresql"
     existingSecret: "secret"
     existingSecretKey: "database_uri"
-  storage:
-    enabled: true
-    size: "3Gi"
+  data:
+    name: "data"
+    size: "10Gi"
+    class: ""
+    path: "/data"
+    keepPvc: true
+  webVaultEnabled: "false"
+  timeZone: "Asia/Shanghai"
+  pushNotifications:
+    installationId: 33d7b87c-cdcd-43e6-9c8e-b14700c761af
+    installationKey: Xh98P2Lhdi6Hhsl8QI4C

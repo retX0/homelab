@@ -82,14 +82,15 @@ app-template:
   persistence:
     config:
       enabled: true
-      accessMode: ReadWriteMany
-      size: 100Mi
+      accessMode: ReadWriteOnce
+      size: 512Mi
       globalMounts:
         - path: /data/
       advancedMounts:
         update:
           glue:
             - path: /etc/xiaoya
+              readOnly: true
     media:
       enabled: true
       type: nfs

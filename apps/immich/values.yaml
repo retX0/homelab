@@ -26,6 +26,8 @@ immich:
         subPath: geodata
   machine-learning:
     enabled: true
+    securityContext:
+      privileged: true
     persistence:
       cache:
         existingClaim: cache
@@ -35,9 +37,9 @@ immich:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
           - matchExpressions:
-            - key: feature.node.kubernetes.io/cpu-model.vendor_id
+            - key: feature.node.kubernetes.io/pci-0300_8086.present
               operator: In
-              values: [ "Intel" ]
+              values: [ "true" ]
   server:
     ingress:
       main:

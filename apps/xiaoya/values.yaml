@@ -83,7 +83,6 @@ app-template:
     config:
       enabled: true
       accessMode: ReadWriteMany
-      storageClass: standard-rwx
       size: 100Mi
       globalMounts:
         - path: /data/

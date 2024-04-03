@@ -3,7 +3,7 @@ democratic-csi:
     name: "truenas-iscsi-csi"
   storageClasses:
     - name: truenas-iscsi-csi
-      defaultClass: false
+      defaultClass: true
       reclaimPolicy: Delete
       volumeBindingMode: Immediate
       allowVolumeExpansion: true

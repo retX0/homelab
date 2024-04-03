@@ -28,4 +28,3 @@ vaultwarden:
   storage:
     enabled: true
     size: "3Gi"
-    class: "standard-rwo"

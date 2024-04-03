@@ -20,7 +20,7 @@ nginx:
       - secretName: nginx-tls
         hosts: 
           - "*.qos.cc"
-  extraVolumeMounts:
+  extraVolumeMounts: # TODO: use template and configmap to generate conf
     - name: conf
       mountPath: /opt/bitnami/nginx/conf/server_blocks/
   extraVolumes:

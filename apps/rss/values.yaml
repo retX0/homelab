@@ -24,4 +24,3 @@ freshrss:
   persistence:
     config:
       enabled: true
-      storageClass: standard-rwo

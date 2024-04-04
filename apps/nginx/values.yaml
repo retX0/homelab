@@ -12,14 +12,20 @@ nginx:
       cert-manager.io/cluster-issuer: letsencrypt-prod
     tls: true
     extraHosts:
-      - name: ha.qos.cc
-      - name: unifi.qos.cc
-      - name: pve.qos.cc
-      - name: emby.qos.cc
+      - name: &ha ha.qos.cc
+      - name: &unifi unifi.qos.cc
+      - name: &pve pve.qos.cc
+      - name: &emby emby.qos.cc
+      - name: &ilo ilo.qos.cc
     extraTls:
       - secretName: nginx-tls
         hosts: 
-          - "*.qos.cc"
+          # - "*.qos.cc"  NOT recommand this one, it will chaneg DNS * to this nginx, cause other proble.
+          - *ha
+          - *unifi
+          - *pve
+          - *emby
+          - *ilo
   extraVolumeMounts: # TODO: use template and configmap to generate conf
     - name: conf
       mountPath: /opt/bitnami/nginx/conf/server_blocks/

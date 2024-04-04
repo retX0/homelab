@@ -23,6 +23,10 @@ app-template:
             TZ: Asia/Shanghai
           securityContext:
             privileged: true
+          resources:
+            limits:
+              cpu: 500m
+              memory: 1024Mi
   service:
     main:
       controller: main

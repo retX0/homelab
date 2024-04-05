@@ -27,7 +27,6 @@ spec:
     defaultVolumesToFsBackup: true
 status:
   phase: "Enabled"
-  lastBackup:
   validationErrors:
     - >-
       a BackupStorageLocation CRD with the name specified in the backup spec

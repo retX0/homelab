@@ -18,13 +18,23 @@ nginx:
       - name: &emby emby.qos.cc
       - name: &ilo ilo.qos.cc
     extraTls:
-      - secretName: nginx-tls
+      # every domain use a single configure.
+      # to be banned from let's encrypt
+      # do not use wild domain 
+      - secretName: ha-tls
         hosts: 
-          # - "*.qos.cc"  NOT recommand this one, it will chaneg DNS * to this nginx, cause other proble.
           - *ha
+      - secretName: unifi-tls
+        hosts: 
           - *unifi
+      - secretName: pve-tls
+        hosts: 
           - *pve
+      - secretName: emby-tls
+        hosts: 
           - *emby
+      - secretName: ilo-tls
+        hosts: 
           - *ilo
   extraVolumeMounts: # TODO: use template and configmap to generate conf
     - name: conf

@@ -1,6 +1,6 @@
 immich:
   image:
-    tag: v1.98.2
+    tag: v1.101.0
   env:
     DB_VECTOR_EXTENSION: "pgvector"
     REDIS_HOSTNAME: "database-redis-headless.database.svc.cluster.local"

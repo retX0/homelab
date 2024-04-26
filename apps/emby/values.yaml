@@ -16,7 +16,7 @@ app-template:
         main:
           image:
             repository: emby/embyserver
-            tag: 4.9.0.14
+            tag: 4.9.0.15
           env:
             PUID: 2199
             PGID: 568

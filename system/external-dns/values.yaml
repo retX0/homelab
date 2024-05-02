@@ -8,6 +8,7 @@ external-dns:
           name: cloudflare-api-token
           key: value
   extraArgs:
+    - --source=service # 监视 service 资源
     - --annotation-filter=external-dns.alpha.kubernetes.io/exclude notin (true)
   interval: 5m
   triggerLoopOnEvent: true
@@ -15,3 +16,11 @@ external-dns:
     enabled: true
     serviceMonitor:
       enabled: true
+
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: bitnami-nginx
+#   annotations:
+#     external-dns.alpha.kubernetes.io/hostname: "nginx.example.com,nginx2.em.cc"
+#   使用这个可以监听 dns 变化

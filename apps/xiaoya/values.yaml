@@ -34,9 +34,9 @@ app-template:
         glue:
           image:
             repository: xiaoyaliu/glue
-            tag: latest
+            tag: python
             pullPolicy: Always
-          command: ['/update.sh']
+          command: ['/init.sh']
           env:
             LANG: C.UTF-8
     clean:

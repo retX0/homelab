@@ -35,7 +35,8 @@ app-template:
           image:
             repository: xiaoyaliu/glue
             tag: python
-            pullPolicy: Always
+            pullPolicy: IfNotPresent
+            # pullPolicy: Always
           command: ['/init.sh']
           env:
             LANG: C.UTF-8
@@ -90,6 +91,17 @@ app-template:
         update:
           glue:
             - path: /etc/xiaoya
+              readOnly: true
+    strm:
+      enabled: true
+      type: nfs
+      server: 172.23.29.4
+      path: /mnt/nfs/pt
+      advancedMounts:
+        update:
+          glue:
+            - path: /strm.txt
+              subPath: Cloud/strm.txt
               readOnly: true
     media:
       enabled: true

@@ -3,7 +3,7 @@ name: frigate
 version: 0.0.0
 dependencies:
 - name: frigate
-  version: 7.4.0
+  version: 7.5.1
   repository: https://blakeblackshear.github.io/blakeshome-charts/
 # - name: double-take
 #   version: 2.3.2

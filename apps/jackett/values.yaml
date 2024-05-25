@@ -8,7 +8,7 @@ app-template:
         main:
           image:
             repository: linuxserver/jackett
-            tag: 0.21.2663
+            tag: 0.21.2688
           env:
             PUID: 2199
             PGID: 568

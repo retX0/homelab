@@ -3,5 +3,5 @@ name: emby
 version: 0.0.0
 dependencies:
   - name: nginx
-    version: 17.3.0
+    version: 17.3.2
     repository: https://charts.bitnami.com/bitnami

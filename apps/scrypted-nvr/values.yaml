@@ -24,7 +24,7 @@ app-template:
           securityContext:
             privileged: true
             capabilities:
-              add: ["CAP_PERFMON", "NET_BIND_SERVICE"]
+              add: ["CAP_PERFMON"]
   service:
     main:
       controller: main
@@ -66,3 +66,9 @@ app-template:
       path: /mnt/wd-disk/NVR
       globalMounts:
         - path: /nvr
+    usb:
+      enabled: true
+      type: hostPath
+      hostPath: "/dev/bus/usb"
+      globalMounts:
+        - path: "/dev/bus/usb"

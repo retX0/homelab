@@ -6,7 +6,7 @@ cloudflared:
   config:
     tunnel: homelab
     ingress:
-      - hostname: '*.qos.cc'
+      - hostname: '*.ret0.dev'
         service: https://ingress-nginx-controller.ingress-nginx
         originRequest:
           noTLSVerify: true

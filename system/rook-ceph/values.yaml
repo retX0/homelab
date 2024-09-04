@@ -13,7 +13,7 @@ rook-ceph-cluster:
       ingressClassName: nginx
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod
-        external-dns.alpha.kubernetes.io/hostname:  &host ceph-dashboard.qos.cc
+        external-dns.alpha.kubernetes.io/hostname:  &host ceph-dashboard.ret0.dev
         nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
       host:
         name: *host

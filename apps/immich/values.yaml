@@ -46,7 +46,7 @@ immich:
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt-prod
         hosts:
-          - host: &host photos.qos.cc
+          - host: &host photos.ret0.dev
             paths:
               - path: /
                 pathType: Prefix

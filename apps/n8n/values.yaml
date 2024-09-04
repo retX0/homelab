@@ -1,5 +1,5 @@
 n8n:
-  domain: n8n.qos.cc
+  domain: n8n.ret0.dev
   existingSecret: n8n-config
   ingress:
     enabled: true
@@ -7,7 +7,7 @@ n8n:
       kubernetes.io/ingress.class: nginx
       cert-manager.io/cluster-issuer: letsencrypt-prod
     hosts:
-      - host: &host n8n.qos.cc
+      - host: &host n8n.ret0.dev
         paths:
           - /
     tls:
@@ -24,7 +24,7 @@ n8n:
       timezone: "Asia/Shanghai"
     host: *host
   extraEnv:
-    WEBHOOK_URL: "https://n8n.qos.cc"
+    WEBHOOK_URL: "https://n8n.ret0.dev"
   persistence:
     enabled: true
     accessMode: ReadWriteOnce

@@ -5,16 +5,16 @@ nginx:
   env:
     TZ: Asia/Shanghai
   ingress:
-    hostname: nginx-local.qos.cc
+    hostname: nginx-local.ret0.dev
     enabled: true
     ingressClassName: nginx
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt-prod
     tls: true
     extraHosts:
-      - name: &pve_host pve.qos.cc
+      - name: &pve_host pve.ret0.dev
         path: /
-      - name: &emby_host emby.qos.cc
+      - name: &emby_host emby.ret0.dev
         path: /
     extraTls:
       - secretName: nginx-tls
@@ -38,7 +38,7 @@ nginx:
       command: ['/bin/sh', '-c']
       args:
         - cd /tmp &&
-          wget https://git.qos.cc/api/v1/repos/public/nginx/archive/main.zip &&
+          wget https://git.ret0.dev/api/v1/repos/public/nginx/archive/main.zip &&
           unzip main.zip && cp -rf /tmp/nginx/* /opt/conf
       volumeMounts:
         - name: conf

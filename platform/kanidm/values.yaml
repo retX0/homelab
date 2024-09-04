@@ -25,8 +25,8 @@ app-template:
           db_path = "/data/kanidm.db"
           tls_chain = "/data/ca.crt"
           tls_key = "/data/tls.key"
-          domain = "auth.qos.cc"
-          origin = "https://auth.qos.cc"
+          domain = "auth.ret0.dev"
+          origin = "https://auth.ret0.dev"
   service:
     main:
       controller: main
@@ -45,7 +45,7 @@ app-template:
         cert-manager.io/cluster-issuer: letsencrypt-prod
         nginx.ingress.kubernetes.io/backend-protocol: HTTPS
       hosts:
-        - host: &host auth.qos.cc
+        - host: &host auth.ret0.dev
           paths:
             - path: /
               pathType: Prefix

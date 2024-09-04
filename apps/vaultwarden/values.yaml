@@ -2,7 +2,7 @@ vaultwarden:
   ingress:
     enabled: true
     class: "nginx"
-    hostname: &host "pwd.qos.cc" 
+    hostname: &host "pwd.ret0.dev" 
     tlsSecret: "vaultwarden-tls-certificate"
     additionalAnnotations:
       cert-manager.io/cluster-issuer: letsencrypt-prod
@@ -10,14 +10,14 @@ vaultwarden:
   smtp:
 
     enabled: false
-    host: mx01.qos.cc
-    from: no-reply@qos.cc
+    host: mx01.ret0.dev
+    from: no-reply@ret0.dev
     fromName: "Vault Administrator"
     username:
       value: admin
     password: 
       value: password #just make it running.
-  domain: https://pwd.qos.cc
+  domain: https://pwd.ret0.dev
   adminToken:
     existingSecret: "secret"
     existingSecretKey: "admin_token"

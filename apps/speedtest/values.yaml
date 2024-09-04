@@ -21,7 +21,7 @@ app-template:
         nginx.ingress.kubernetes.io/proxy-body-size: 50m
         cert-manager.io/cluster-issuer: letsencrypt-prod
       hosts:
-        - host: &host speedtest.qos.cc
+        - host: &host speedtest.ret0.dev
           paths:
             - path: /
               pathType: Prefix

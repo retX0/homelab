@@ -1,5 +1,5 @@
 data "cloudflare_zone" "zone" {
-  name = "qos.cc"
+  name = "ret0.dev"
 }
 
 data "cloudflare_api_token_permission_groups" "all" {}

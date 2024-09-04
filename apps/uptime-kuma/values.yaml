@@ -68,7 +68,7 @@ ingress:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
   hosts:
-    - host: &host uptime.qos.cc
+    - host: &host uptime.ret0.dev
       paths:
         - path: /
           pathType: Prefix

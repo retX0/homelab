@@ -9,7 +9,7 @@ app-template:
           env:
             PAPERLESS_PORT: 8000
             PAPERLESS_ADMIN_USER: admin
-            PAPERLESS_URL: https://paperless.qos.cc
+            PAPERLESS_URL: https://paperless.ret0.dev
             PAPERLESS_REDIS: redis://database-redis-headless.database:6379
             PAPERLESS_DBHOST: database-postgresql.database
             PAPERLESS_APPS: allauth.socialaccount.providers.openid_connect
@@ -33,7 +33,7 @@ app-template:
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod
       hosts:
-        - host: &host paperless.qos.cc
+        - host: &host paperless.ret0.dev
           paths:
             - path: /
               pathType: Prefix

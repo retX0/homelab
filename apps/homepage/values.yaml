@@ -20,7 +20,7 @@ app-template:
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod
       hosts:
-        - host: &host home.qos.cc
+        - host: &host home.ret0.dev
           paths:
             - path: /
               pathType: Prefix
@@ -62,23 +62,23 @@ app-template:
         services.yaml: |
           - Popular:
             - Jellyseerr:
-                href: https://jellyseerr.qos.cc/
+                href: https://jellyseerr.ret0.dev/
                 description: Moive and TV management
                 icon: jellyseerr.svg
             - Github:
                 href: https://www.github.com
                 icon: github.svg
             - Gitea:
-                href: https://git.qos.cc
+                href: https://git.ret0.dev
                 description: Git forge
                 icon: gitea.svg
           - Management:
             - Radarr:
-                href: https://radarr.qos.cc
+                href: https://radarr.ret0.dev
                 description: Movie manager
                 icon: radarr.svg
             - Sonarr:
-                href: https://sonarr.qos.cc
+                href: https://sonarr.ret0.dev
                 description: TV show manager
                 icon: sonarr.svg
             - qBittorrent:
@@ -86,33 +86,33 @@ app-template:
                 description: qBittorrent client
                 icon: qbittorrent.svg
             - Kanidm:
-                href: https://auth.qos.cc
+                href: https://auth.ret0.dev
                 description: Identity management
-                icon: https://auth.qos.cc/pkg/img/logo-square.svg
+                icon: https://auth.ret0.dev/pkg/img/logo-square.svg
           - Development:
             - Woodpecker:
-                href: https://ci.qos.cc
+                href: https://ci.ret0.dev
                 description: Continuous integration
                 icon: woodpecker-ci.svg
             - ArgoCD:
-                href: https://argocd.qos.cc
+                href: https://argocd.ret0.dev
                 description: Continuous deployment
                 icon: argocd.svg
             - Registry:
-                href: https://registry.qos.cc
+                href: https://registry.ret0.dev
                 description: Container registry
                 icon: docker.svg
             - Grafana:
-                href: https://grafana.qos.cc
+                href: https://grafana.ret0.dev
                 description: Observability dashboards
                 icon: grafana.svg
           - Utilities:
             - Speedtest:
-                href: https://speedtest.qos.cc
+                href: https://speedtest.ret0.dev
                 description: Internal network speed test
                 icon: openspeedtest.png
             - Node-red:
-                href: https://node-red.qos.cc
+                href: https://node-red.ret0.dev
                 description: Node for homeassist
                 icon: node-red.svg
         bookmarks.yaml: |

@@ -54,7 +54,7 @@ app-template:
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod
       hosts:
-        - host: &host jellyseerr.qos.cc
+        - host: &host jellyseerr.ret0.dev
           paths:
             - path: /
               pathType: Prefix
@@ -71,7 +71,7 @@ app-template:
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod
       hosts:
-        - host: &host radarr.qos.cc
+        - host: &host radarr.ret0.dev
           paths:
             - path: /
               pathType: Prefix
@@ -88,7 +88,7 @@ app-template:
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod
       hosts:
-        - host: &host sonarr.qos.cc
+        - host: &host sonarr.ret0.dev
           paths:
             - path: /
               pathType: Prefix

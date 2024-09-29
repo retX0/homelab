@@ -91,19 +91,15 @@ app-template:
                 icon: https://auth.qos.cc/pkg/img/logo-square.svg
           - Development:
             - Woodpecker:
-                href: https://ci.qos.cc
+                href: https://ci.ret0.dev
                 description: Continuous integration
                 icon: woodpecker-ci.svg
             - ArgoCD:
                 href: https://argocd.qos.cc
                 description: Continuous deployment
                 icon: argocd.svg
-            - Registry:
-                href: https://registry.qos.cc
-                description: Container registry
-                icon: docker.svg
             - Grafana:
-                href: https://grafana.qos.cc
+                href: https://grafana.ret0.dev
                 description: Observability dashboards
                 icon: grafana.svg
           - Utilities:

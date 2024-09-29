@@ -1,3 +1,5 @@
+# for icon
+# https://gethomepage.dev/configs/services/#descriptions 
 app-template:
   controllers:
     main:
@@ -72,6 +74,10 @@ app-template:
                 href: https://git.qos.cc
                 description: Git forge
                 icon: gitea.svg
+            - Immich:
+                href: https://photos.qos.cc
+                description: photos management
+                icon: sh-immich.svg
           - Management:
             - Radarr:
                 href: https://radarr.qos.cc
@@ -111,6 +117,10 @@ app-template:
                 href: https://node-red.qos.cc
                 description: Node for homeassist
                 icon: node-red.svg
+            - Stiring PDF:
+                href: https://pdf.qos.cc/
+                description: A pdf utils
+                icon: sh-stirling-pdf.svg
         bookmarks.yaml: |
           - Infrastructure:
             - Router:

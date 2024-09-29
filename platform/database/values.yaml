@@ -10,6 +10,7 @@ postgresql:
           adminPasswordKey: "adminPassword"
   primary:
     name: primary 
+    resourcesPreset: none
     service:
       type: LoadBalancer
     persistence:

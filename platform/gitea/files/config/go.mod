@@ -3,7 +3,7 @@ module git.qos.cc/khuedoan/homelab/gitea/config
 go 1.19
 
 require (
-	code.gitea.io/sdk/gitea v0.18.0
+	code.gitea.io/sdk/gitea v0.19.0
 	gopkg.in/yaml.v2 v2.4.0
 	gopkg.in/yaml.v3 v3.0.1
 )

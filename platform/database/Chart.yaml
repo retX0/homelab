@@ -3,11 +3,11 @@ name: database
 version: 0.0.0
 dependencies:
 - name: postgresql
-  version: 15.5.16
+  version: 15.5.38
   repository: https://charts.bitnami.com/bitnami
 - name: mysql
-  version: 11.1.17
+  version: 11.1.20
   repository: https://charts.bitnami.com/bitnami
 - name: redis
-  version: 20.2.0
+  version: 20.6.0
   repository: https://charts.bitnami.com/bitnami

@@ -18,7 +18,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/koush/scrypted
-            tag: v0.119.1-jammy-full
+            tag: v0.123.58-jammy-full
           env:
             TZ: Asia/Shanghai
           securityContext:

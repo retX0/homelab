@@ -9,6 +9,8 @@ freshrss:
       annotations:
         kubernetes.io/ingress.class: nginx
         cert-manager.io/cluster-issuer: letsencrypt-prod
+        external-dns.alpha.kubernetes.io/target: "homelab-tunnel.qos.cc"
+        external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
       hosts:
         - host: &host rss.qos.cc
           paths:

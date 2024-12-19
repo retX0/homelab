@@ -5,7 +5,6 @@ go 1.19
 require (
 	code.gitea.io/sdk/gitea v0.19.0
 	gopkg.in/yaml.v3 v3.0.1
-	gopkg.in/yaml.v3 v3.0.1
 )
 
 require (
@@ -14,4 +13,5 @@ require (
 	github.com/hashicorp/go-version v1.6.0 // indirect
 	golang.org/x/crypto v0.22.0 // indirect
 	golang.org/x/sys v0.19.0 // indirect
+	gopkg.in/yaml.v2 v2.4.0 // indirect
 )

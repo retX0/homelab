@@ -1,4 +1,6 @@
 freshrss:
+  image:
+    tag: "1.24.3-ls253"
   env:
     TZ: "Asia/Shanghai"
   ingress:

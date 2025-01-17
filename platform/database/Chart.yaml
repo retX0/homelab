@@ -9,5 +9,5 @@ dependencies:
   version: 11.1.20
   repository: https://charts.bitnami.com/bitnami
 - name: redis
-  version: 20.6.0
+  version: 20.6.3
   repository: https://charts.bitnami.com/bitnami

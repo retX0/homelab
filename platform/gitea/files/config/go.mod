@@ -1,6 +1,6 @@
 module git.qos.cc/khuedoan/homelab/gitea/config
 
-go 1.19
+go 1.20
 
 require (
 	code.gitea.io/sdk/gitea v0.20.0

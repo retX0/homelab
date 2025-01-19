@@ -42,6 +42,14 @@ app-template:
         http:
           port: 33400
           protocol: HTTP
+    remote:
+      controller: main
+      type: NodePort
+      ports:
+        http:
+          port: 32400
+          protocol: TCP
+          nodePort: 32400
   ingress:
     main:
       enabled: true

@@ -16,7 +16,8 @@ app-template:
         main:
           image:
             repository: plexinc/pms-docker
-            tag: 1.41.3.9314-a0bfb8370
+            tag: latest
+            pullPolicy: Always
           env:
             PUID: 2199
             PGID: 568
